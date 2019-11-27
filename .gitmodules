@@ -1,0 +1,4 @@
+[submodule "buildroot"]
+	path = buildroot
+	url = git://git.buildroot.net/buildroot
+	branch = tags/2019.02.7
