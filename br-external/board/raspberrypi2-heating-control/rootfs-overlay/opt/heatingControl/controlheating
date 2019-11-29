@@ -1,0 +1,95 @@
+#!/bin/sh
+
+
+# Pin to control the heating
+MyPin="17"
+
+# File to save last state
+LastStateFile="/media/persistent/last_state"
+
+GPIO_PATH="/sys/class/gpio"
+
+ON="1"
+OFF="0"
+
+# export pin
+exportPin()
+{
+  # check if already exported
+  if [ ! -e $GPIO_PATH/gpio$1 ]; then
+    echo "$1" > $GPIO_PATH/export
+  fi
+}
+
+# set pin direction as output
+setOutput()
+{
+  # check if already output
+  if [ $(cat $GPIO_PATH/gpio$1/direction) != "out" ]; then
+    echo "out" > $GPIO_PATH/gpio$1/direction
+  fi
+}
+
+# set pin value
+setPin()
+{
+  echo $2 > $GPIO_PATH/gpio$1/value
+}
+
+# read pin value
+readPin()
+{
+  cat $GPIO_PATH/gpio$1/value
+}
+
+heatingOn()
+{
+  echo "Turning heating on"
+  setPin $MyPin $ON
+  echo "on" > $LastStateFile
+}
+
+heatingOff()
+{
+  echo "Turning heating off"
+  setPin $MyPin $OFF
+  echo "off" > $LastStateFile
+}
+
+# ensure correct pin configuration
+exportPin $MyPin
+setOutput $MyPin
+# ensure that file exists
+touch $LastStateFile
+
+case $1 in
+    on)
+        heatingOn
+        ;;
+    off)
+        heatingOff
+        ;;
+    status)
+        if [ "$(readPin $MyPin)" -eq "1" ]; then
+          echo "on"
+        else
+          echo "off"
+        fi
+        ;;
+    restore)
+        if [ "$(head -1 $LastStateFile)" == "on" ]; then
+          heatingOn
+        elif [ "$(head -1 $LastStateFile)" == "off" ]; then
+          heatingOff
+        else
+          echo "ERROR: invalid last state"
+          exit 1
+        fi
+        ;;
+    *)
+        echo "ERROR: unknown parameter \"$1\""
+        exit 1
+        ;;
+esac
+
+exit 0

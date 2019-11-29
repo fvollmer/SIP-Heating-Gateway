@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Restoring the last state of the heating
+#
+
+case "$1" in
+  start)
+	printf "Restoring heating state: "
+	/opt/heatingControl/controlheating restore
+	;;
+  *)
+	echo "Usage: $0 {start}"
+	exit 1
+esac
+
+exit $?
+

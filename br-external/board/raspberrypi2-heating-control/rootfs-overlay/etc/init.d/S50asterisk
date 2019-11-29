@@ -1,0 +1,32 @@
+#!/bin/sh
+
+asterisk_start()
+{
+  echo "Starting Asterisk"
+  asterisk
+}
+
+asterisk_stop()
+{
+  if [ -r /var/run/asterisk/asterisk.pid ]; then
+    kill $(cat /var/run/asterisk/asterisk.pid)
+  fi
+}
+
+case "$1" in
+  start)
+    asterisk_start
+    ;;
+  stop)
+    asterisk_stop
+    ;;
+  restart)
+    asterisk_stop
+    asterisk_start
+    ;;
+  *)
+    echo "usage $0 {start|stop|restart}"
+    ;;
+esac
+
+exit $?

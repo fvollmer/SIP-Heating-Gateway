@@ -1,0 +1,12 @@
+agent-pass: Bitte geben Sie ihr Passwort ein und bestätigen Sie mit der Raute-Taste.
+auth-incorrect: Passwort falsch. Bitte geben Sie ihr Passwort ein und bestätigen Sie mit der Raute-Taste.
+auth-thankyou: Danke. 
+vm-goodbye: Auf Wiedersehen
+vm-sorry.gsm: Entschuldigung. Ich habe Ihre Eingabe nicht verstanden.
+heating-menu: Wählen Sie eine der folgenden Optionen. Eins um die Heizung einzuschalten, Zwei um die Heizung auszuschalten, Drei um den Status der Heizung abzufragen.
+heating-action-on: Die Heizung wurde eingeschaltet.
+heating-action-off: Die Heizung wurde ausgeschaltet.
+heating-on: Die Heizung ist eingeschaltet.
+heating-off: Die Heizung ist ausgeschaltet.
+heating-error: Es ist ein Fehler aufgetreten.
+
