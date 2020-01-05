@@ -1,0 +1,1547 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A3 16535 11693
+encoding utf-8
+Sheet 1 1
+Title "Raspberry Pi HAT"
+Date ""
+Rev "A"
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L raspberrypi_hat:CAT24C32 U2
+U 1 1 58E1713F
+P 2400 6000
+F 0 "U2" H 2750 6350 50  0000 C CNN
+F 1 "CAT24C32" H 2150 6350 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 2400 6000 50  0001 C CNN
+F 3 "https://www.onsemi.com/pub/Collateral/CAT24C32-D.PDF" H 2400 6000 50  0000 C CNN
+F 4 "CAT24C32WI-GT3CT-ND" H 2400 6000 50  0001 C CNN "Digikey#"
+F 5 "n.a." H 2400 6000 50  0001 C CNN "Reichelt#"
+	1    2400 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R6
+U 1 1 58E17715
+P 2650 7600
+F 0 "R6" V 2730 7600 50  0000 C CNN
+F 1 "3.9K" V 2650 7600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2580 7600 50  0001 C CNN
+F 3 "~" H 2650 7600 50  0001 C CNN
+F 4 "~" H 2650 7600 50  0001 C CNN "Digikey#"
+F 5 "~" H 2650 7600 50  0001 C CNN "Reichelt#"
+	1    2650 7600
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R8
+U 1 1 5CBFBD37
+P 2650 7850
+F 0 "R8" V 2730 7850 50  0000 C CNN
+F 1 "3.9K" V 2650 7850 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2580 7850 50  0001 C CNN
+F 3 "~" H 2650 7850 50  0001 C CNN
+F 4 "~" H 2650 7850 50  0001 C CNN "Digikey#"
+F 5 "~" H 2650 7850 50  0001 C CNN "Reichelt#"
+	1    2650 7850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2800 7600 3000 7600
+Wire Wire Line
+	3000 7850 2800 7850
+Connection ~ 3000 7600
+Text Label 1550 7600 0    60   ~ 0
+ID_SD_EEPROM
+Text Label 1550 7850 0    60   ~ 0
+ID_SC_EEPROM
+Wire Wire Line
+	3750 6200 2900 6200
+Wire Wire Line
+	2900 6100 3750 6100
+Text Label 3750 6100 2    60   ~ 0
+ID_SD_EEPROM
+Text Label 3750 6200 2    60   ~ 0
+ID_SC_EEPROM
+$Comp
+L Connector_Generic:Conn_01x02 J9
+U 1 1 5CBFBD38
+P 1050 6250
+F 0 "J9" H 1050 6400 50  0000 C CNN
+F 1 "Disable_WP" V 1150 6250 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1050 6250 50  0001 C CNN
+F 3 "~" H 1050 6250 50  0000 C CNN
+F 4 "~" H 1050 6250 50  0001 C CNN "Digikey#"
+F 5 "~" H 1050 6250 50  0001 C CNN "Reichelt#"
+	1    1050 6250
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R29
+U 1 1 58E19E51
+P 1850 6400
+F 0 "R29" V 1930 6400 50  0000 C CNN
+F 1 "10K" V 1850 6400 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1780 6400 50  0001 C CNN
+F 3 "~" H 1850 6400 50  0001 C CNN
+F 4 "~" H 1850 6400 50  0001 C CNN "Digikey#"
+F 5 "~" H 1850 6400 50  0001 C CNN "Reichelt#"
+	1    1850 6400
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2400 5500 2400 5600
+$Comp
+L power:GND #PWR03
+U 1 1 5CBFBD3A
+P 1350 5900
+F 0 "#PWR03" H 1350 5650 50  0001 C CNN
+F 1 "GND" H 1350 5750 50  0000 C CNN
+F 2 "" H 1350 5900 50  0000 C CNN
+F 3 "" H 1350 5900 50  0000 C CNN
+	1    1350 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1600 5800 1600 5900
+Wire Wire Line
+	1350 5800 1600 5800
+Wire Wire Line
+	1900 5900 1600 5900
+Connection ~ 1600 5900
+Wire Wire Line
+	1600 6000 1900 6000
+$Comp
+L power:GND #PWR04
+U 1 1 5CBFBD3B
+P 1350 6300
+F 0 "#PWR04" H 1350 6050 50  0001 C CNN
+F 1 "GND" H 1350 6150 50  0000 C CNN
+F 2 "" H 1350 6300 50  0000 C CNN
+F 3 "" H 1350 6300 50  0000 C CNN
+	1    1350 6300
+	1    0    0    -1  
+$EndComp
+Text Notes 3550 5400 0    60   ~ 0
+EEPROM WRITE ENABLE
+$Comp
+L Device:R R11
+U 1 1 5CBFBD3C
+P 1600 6250
+F 0 "R11" V 1680 6250 50  0000 C CNN
+F 1 "DNM" V 1600 6250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1530 6250 50  0001 C CNN
+F 3 "~" H 1600 6250 50  0001 C CNN
+F 4 "~" H 1600 6250 50  0001 C CNN "Digikey#"
+F 5 "~" H 1600 6250 50  0001 C CNN "Reichelt#"
+	1    1600 6250
+	0    1    1    0   
+$EndComp
+Text Notes 1850 7100 0    118  ~ 24
+Pullup Resistors
+Text Notes 2300 4850 0    118  ~ 24
+HAT EEPROM
+Text Notes 2100 1450 0    118  ~ 24
+40-Pin HAT Connector
+Text Label 1150 3450 0    60   ~ 0
+ID_SD_EEPROM
+Wire Wire Line
+	2350 3450 1150 3450
+Wire Wire Line
+	3950 3350 5150 3350
+Text Label 5150 3350 2    60   ~ 0
+ID_SC_EEPROM
+Wire Wire Line
+	3000 7850 3000 7600
+Text Notes 1500 5250 0    60   ~ 0
+The HAT spec requires this EEPROM with system information\nto be in place in order to be called a HAT. It should be set up as write\nprotected (WP pin held high), so it may be desirable to either put a \njumper as shown to enable writing, or to hook up a spare IO pin to do so.
+Text Notes 1400 7300 0    60   ~ 0
+These are just pullup resistors for the I2C bus on the EEPROM.\nThe resistor values are per the HAT spec.
+Text Notes 950  8600 0    100  ~ 0
+This is based on the official Raspberry Pi spec\nto be able to call an extension board a HAT.\nhttps://github.com/raspberrypi/hats/blob/master/designguide.md
+$Comp
+L power:GND #PWR05
+U 1 1 58E3CC10
+P 2400 6500
+F 0 "#PWR05" H 2400 6250 50  0001 C CNN
+F 1 "GND" H 2400 6350 50  0000 C CNN
+F 2 "" H 2400 6500 50  0000 C CNN
+F 3 "" H 2400 6500 50  0000 C CNN
+	1    2400 6500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2400 6400 2400 6500
+Wire Wire Line
+	2100 6700 1850 6700
+Wire Wire Line
+	1850 6700 1850 6550
+Wire Wire Line
+	1750 6200 1850 6200
+Wire Wire Line
+	1850 6150 1850 6200
+Wire Wire Line
+	1350 5800 1350 5900
+Connection ~ 1600 5800
+Wire Wire Line
+	1750 6200 1750 6250
+Connection ~ 1850 6200
+Wire Wire Line
+	1250 6250 1350 6250
+Wire Wire Line
+	1350 6300 1350 6250
+Connection ~ 1350 6250
+Wire Wire Line
+	1250 6150 1850 6150
+Wire Wire Line
+	1600 5900 1600 6000
+Wire Wire Line
+	1600 5800 1900 5800
+Wire Wire Line
+	1850 6200 1900 6200
+Wire Wire Line
+	1850 6200 1850 6250
+Wire Wire Line
+	1350 6250 1450 6250
+$Comp
+L Connector:Barrel_Jack_Switch J1
+U 1 1 5C93FA63
+P 8750 2400
+F 0 "J1" H 8807 2717 50  0000 C CNN
+F 1 "Wuerth 694108301002 " H 8807 2626 50  0000 C CNN
+F 2 "Connector_BarrelJack:BarrelJack_Wuerth_6941xx301002" H 8800 2360 50  0001 C CNN
+F 3 "~" H 8800 2360 50  0001 C CNN
+F 4 "732-5934-ND" H 8750 2400 50  0001 C CNN "Digikey#"
+	1    8750 2400
+	1    0    0    -1  
+$EndComp
+NoConn ~ 9050 2400
+$Comp
+L Connector:TestPoint TP1
+U 1 1 5D19EEE9
+P 9600 2100
+F 0 "TP1" H 9658 2218 50  0000 L CNN
+F 1 "VEXT" H 9658 2127 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 9800 2100 50  0001 C CNN
+F 3 "~" H 9800 2100 50  0001 C CNN
+F 4 "~" H 9600 2100 50  0001 C CNN "Digikey#"
+F 5 "~" H 9600 2100 50  0001 C CNN "Reichelt#"
+	1    9600 2100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP2
+U 1 1 5D19F361
+P 9350 2100
+F 0 "TP2" H 9408 2218 50  0000 L CNN
+F 1 "GND" H 9408 2127 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 9550 2100 50  0001 C CNN
+F 3 "~" H 9550 2100 50  0001 C CNN
+F 4 "~" H 9350 2100 50  0001 C CNN "Digikey#"
+F 5 "~" H 9350 2100 50  0001 C CNN "Reichelt#"
+	1    9350 2100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2350 3650 1850 3650
+Text Label 1850 3650 0    50   ~ 0
+BCM6
+Wire Wire Line
+	1550 7600 2500 7600
+Wire Wire Line
+	1550 7850 2500 7850
+Text Label 1150 2550 0    50   ~ 0
+SDA
+Text Label 1150 2650 0    50   ~ 0
+SCL
+$Comp
+L power:+3V3 #PWR0112
+U 1 1 5D26EFFD
+P 3550 7500
+F 0 "#PWR0112" H 3550 7350 50  0001 C CNN
+F 1 "+3V3" H 3565 7673 50  0000 C CNN
+F 2 "" H 3550 7500 50  0001 C CNN
+F 3 "" H 3550 7500 50  0001 C CNN
+	1    3550 7500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3000 7600 3550 7600
+Wire Wire Line
+	3550 7600 3550 7500
+$Comp
+L power:+3V3 #PWR0113
+U 1 1 5D27DCD8
+P 2100 6600
+F 0 "#PWR0113" H 2100 6450 50  0001 C CNN
+F 1 "+3V3" H 2115 6773 50  0000 C CNN
+F 2 "" H 2100 6600 50  0001 C CNN
+F 3 "" H 2100 6600 50  0001 C CNN
+	1    2100 6600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2100 6700 2100 6600
+$Comp
+L power:+3V3 #PWR0114
+U 1 1 5D282F2A
+P 3050 1850
+F 0 "#PWR0114" H 3050 1700 50  0001 C CNN
+F 1 "+3V3" H 3065 2023 50  0000 C CNN
+F 2 "" H 3050 1850 50  0001 C CNN
+F 3 "" H 3050 1850 50  0001 C CNN
+	1    3050 1850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3050 1950 3050 1850
+$Comp
+L power:+3V3 #PWR0116
+U 1 1 5D28E207
+P 2400 5500
+F 0 "#PWR0116" H 2400 5350 50  0001 C CNN
+F 1 "+3V3" H 2415 5673 50  0000 C CNN
+F 2 "" H 2400 5500 50  0001 C CNN
+F 3 "" H 2400 5500 50  0001 C CNN
+	1    2400 5500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C1
+U 1 1 5DA65D01
+P 4100 6050
+F 0 "C1" H 4215 6096 50  0000 L CNN
+F 1 "100n" H 4215 6005 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4138 5900 50  0001 C CNN
+F 3 "~" H 4100 6050 50  0001 C CNN
+F 4 "~" H 4100 6050 50  0001 C CNN "Digikey#"
+F 5 "~" H 4100 6050 50  0001 C CNN "Reichelt#"
+	1    4100 6050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR0124
+U 1 1 5DA65D0B
+P 4100 5850
+F 0 "#PWR0124" H 4100 5700 50  0001 C CNN
+F 1 "+3V3" H 4115 6023 50  0000 C CNN
+F 2 "" H 4100 5850 50  0001 C CNN
+F 3 "" H 4100 5850 50  0001 C CNN
+	1    4100 5850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0125
+U 1 1 5DA65D15
+P 4100 6300
+F 0 "#PWR0125" H 4100 6050 50  0001 C CNN
+F 1 "GND" H 4100 6150 50  0000 C CNN
+F 2 "" H 4100 6300 50  0000 C CNN
+F 3 "" H 4100 6300 50  0000 C CNN
+	1    4100 6300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4100 5850 4100 5900
+Wire Wire Line
+	4100 6200 4100 6300
+$Comp
+L Device:CP C2
+U 1 1 5DA6D47F
+P 12700 2300
+F 0 "C2" H 12818 2346 50  0000 L CNN
+F 1 "DNM" H 12818 2255 50  0000 L CNN
+F 2 "Capacitor_SMD:CP_Elec_6.3x7.7" H 12738 2150 50  0001 C CNN
+F 3 "~" H 12700 2300 50  0001 C CNN
+F 4 "~" H 12700 2300 50  0001 C CNN "Digikey#"
+F 5 "~" H 12700 2300 50  0001 C CNN "Reichelt#"
+	1    12700 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L other:NCV8402xSTT1G Q1
+U 1 1 5DEC306B
+P 11350 7000
+F 0 "Q1" H 11878 7046 50  0000 L CNN
+F 1 "NCV8402xSTT1G" H 11878 6955 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-223" H 11350 6550 50  0001 C CNN
+F 3 "https://www.onsemi.com/pub/Collateral/NCV8402-D.PDF" H 11650 7100 50  0001 C CNN
+F 4 "NCV8402ASTT1GOSCT-ND" H 11350 7000 50  0001 C CNN "Digikey#"
+F 5 "n.a." H 11350 7000 50  0001 C CNN "Reichelt#"
+	1    11350 7000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED D1
+U 1 1 5DEC9F17
+P 11100 6100
+F 0 "D1" V 11139 5983 50  0000 R CNN
+F 1 "S" V 11048 5983 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric_Castellated" H 11100 6100 50  0001 C CNN
+F 3 "~" H 11100 6100 50  0001 C CNN
+F 4 "WUE 150060GS750" H 11100 6100 50  0001 C CNN "Reichelt#"
+F 5 "732-4971-1-ND" H 11100 6100 50  0001 C CNN "Digikey#"
+	1    11100 6100
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	11100 6250 11100 6450
+Wire Wire Line
+	11100 6450 11650 6450
+Connection ~ 11650 6450
+Wire Wire Line
+	11650 6450 11650 6500
+Wire Wire Line
+	11650 6300 11650 6450
+Text Label 3450 10100 0    50   ~ 0
+BCM17
+$Comp
+L Device:D D4
+U 1 1 5DEC9F2F
+P 13400 6100
+F 0 "D4" V 13354 6179 50  0000 L CNN
+F 1 "D" V 13445 6179 50  0000 L CNN
+F 2 "Diode_SMD:D_SMB-SMC_Universal_Handsoldering" H 13400 6100 50  0001 C CNN
+F 3 "~" H 13400 6100 50  0001 C CNN
+F 4 "MBRS340T3GOSCT-ND" H 13400 6100 50  0001 C CNN "Digikey#"
+	1    13400 6100
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:Jumper_NC_Small JP2
+U 1 1 5DEC9F36
+P 6900 5950
+F 0 "JP2" H 6900 6214 50  0000 C CNN
+F 1 "Jumper_CH1_PIN" H 6900 6123 50  0000 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm" H 6900 5950 50  0001 C CNN
+F 3 "~" H 6900 5950 50  0001 C CNN
+F 4 "~" H 6900 5950 50  0001 C CNN "Digikey#"
+F 5 "~" H 6900 5950 50  0001 C CNN "Reichelt#"
+	1    6900 5950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6500 5950 6800 5950
+Wire Wire Line
+	11650 7500 11650 7800
+Wire Wire Line
+	7950 5950 7700 5950
+$Comp
+L Device:R R1
+U 1 1 5DF57B22
+P 7550 5950
+F 0 "R1" V 7343 5950 50  0000 C CNN
+F 1 "100" V 7434 5950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7480 5950 50  0001 C CNN
+F 3 "~" H 7550 5950 50  0001 C CNN
+F 4 "~" H 7550 5950 50  0001 C CNN "Digikey#"
+F 5 "~" H 7550 5950 50  0001 C CNN "Reichelt#"
+	1    7550 5950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7000 5950 7400 5950
+Wire Wire Line
+	13850 6550 13850 5850
+Wire Wire Line
+	13850 6550 14200 6550
+Wire Wire Line
+	13750 6650 13750 6300
+Wire Wire Line
+	13750 6650 14200 6650
+$Comp
+L power:VCC #PWR0101
+U 1 1 5DFEF3DD
+P 8600 5350
+F 0 "#PWR0101" H 8600 5200 50  0001 C CNN
+F 1 "VCC" H 8617 5523 50  0000 C CNN
+F 2 "" H 8600 5350 50  0001 C CNN
+F 3 "" H 8600 5350 50  0001 C CNN
+	1    8600 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0102
+U 1 1 5DFEFF4B
+P 13400 4950
+F 0 "#PWR0102" H 13400 4800 50  0001 C CNN
+F 1 "VCC" H 13417 5123 50  0000 C CNN
+F 2 "" H 13400 4950 50  0001 C CNN
+F 3 "" H 13400 4950 50  0001 C CNN
+	1    13400 4950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Isolator:LTV-357T U1
+U 1 1 5E00A906
+P 8250 6050
+F 0 "U1" H 8250 6375 50  0000 C CNN
+F 1 "LTV-357T" H 8250 6284 50  0000 C CNN
+F 2 "Package_SO:SO-4_4.4x3.6mm_P2.54mm" H 8050 5850 50  0001 L CIN
+F 3 "https://www.buerklin.com/medias/sys_master/download/download/h91/ha0/8892020588574.pdf" H 8250 6050 50  0001 L CNN
+F 4 "160-1339-1-ND" H 8250 6050 50  0001 C CNN "Digikey#"
+F 5 "LTV 357T-SMD" H 8250 6050 50  0001 C CNN "Reichelt#"
+	1    8250 6050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7950 6150 7850 6150
+Wire Wire Line
+	7850 6150 7850 6650
+$Comp
+L power:GND #PWR0105
+U 1 1 5E0356FC
+P 7850 6650
+F 0 "#PWR0105" H 7850 6400 50  0001 C CNN
+F 1 "GND" H 7855 6477 50  0000 C CNN
+F 2 "" H 7850 6650 50  0001 C CNN
+F 3 "" H 7850 6650 50  0001 C CNN
+	1    7850 6650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GNDPWR #PWR0106
+U 1 1 5E035A62
+P 11650 7800
+F 0 "#PWR0106" H 11650 7600 50  0001 C CNN
+F 1 "GNDPWR" H 11654 7646 50  0000 C CNN
+F 2 "" H 11650 7750 50  0001 C CNN
+F 3 "" H 11650 7750 50  0001 C CNN
+	1    11650 7800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW2
+U 1 1 5E054E8D
+P 2900 10400
+F 0 "SW2" H 2900 10685 50  0000 C CNN
+F 1 "SW_Push" H 2900 10594 50  0000 C CNN
+F 2 "Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm" H 2900 10600 50  0001 C CNN
+F 3 "~" H 2900 10600 50  0001 C CNN
+F 4 "" H 2900 10400 50  0001 C CNN "Digikey#"
+	1    2900 10400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0107
+U 1 1 5E054E93
+P 3150 10600
+F 0 "#PWR0107" H 3150 10350 50  0001 C CNN
+F 1 "GND" H 3155 10427 50  0000 C CNN
+F 2 "" H 3150 10600 50  0001 C CNN
+F 3 "" H 3150 10600 50  0001 C CNN
+	1    3150 10600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3100 10400 3150 10400
+Wire Wire Line
+	3150 10400 3150 10600
+$Comp
+L Device:Jumper_NC_Small JP1
+U 1 1 5E054E9C
+P 2400 10400
+F 0 "JP1" H 2400 10664 50  0000 C CNN
+F 1 "Jumper_Switch_PIN" H 2400 10573 50  0000 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm" H 2400 10400 50  0001 C CNN
+F 3 "~" H 2400 10400 50  0001 C CNN
+F 4 "~" H 2400 10400 50  0001 C CNN "Digikey#"
+F 5 "~" H 2400 10400 50  0001 C CNN "Reichelt#"
+	1    2400 10400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1950 10400 2300 10400
+Wire Wire Line
+	2500 10400 2650 10400
+$Comp
+L Device:LED D2
+U 1 1 5E06ACF9
+P 15550 2350
+F 0 "D2" V 15589 2233 50  0000 R CNN
+F 1 "P" V 15498 2233 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric_Castellated" H 15550 2350 50  0001 C CNN
+F 3 "~" H 15550 2350 50  0001 C CNN
+F 4 "WUE 150060RS750" H 15550 2350 50  0001 C CNN "Reichelt#"
+F 5 "732-4978-1-ND" H 15550 2350 50  0001 C CNN "Digikey#"
+	1    15550 2350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GNDPWR #PWR0115
+U 1 1 5E06C866
+P 12700 2550
+F 0 "#PWR0115" H 12700 2350 50  0001 C CNN
+F 1 "GNDPWR" H 12704 2396 50  0000 C CNN
+F 2 "" H 12700 2500 50  0001 C CNN
+F 3 "" H 12700 2500 50  0001 C CNN
+	1    12700 2550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1150 2550 2350 2550
+Wire Wire Line
+	1150 2650 2350 2650
+$Comp
+L power:GND #PWR0120
+U 1 1 5E0C9E09
+P 900 10600
+F 0 "#PWR0120" H 900 10350 50  0001 C CNN
+F 1 "GND" H 905 10427 50  0000 C CNN
+F 2 "" H 900 10600 50  0001 C CNN
+F 3 "" H 900 10600 50  0001 C CNN
+	1    900  10600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	900  10600 900  10400
+Wire Wire Line
+	900  10400 1050 10400
+Wire Wire Line
+	1050 10300 900  10300
+Wire Wire Line
+	1050 10200 900  10200
+Text Label 900  10300 0    50   ~ 0
+RX
+Text Label 900  10200 0    50   ~ 0
+TX
+$Comp
+L Connector:Conn_01x04_Male J6
+U 1 1 5E0D70B7
+P 1250 10300
+F 0 "J6" H 1222 10182 50  0000 R CNN
+F 1 "UART" H 1222 10273 50  0000 R CNN
+F 2 "Connector_PinHeader_1.27mm:PinHeader_1x04_P1.27mm_Vertical" H 1250 10300 50  0001 C CNN
+F 3 "~" H 1250 10300 50  0001 C CNN
+F 4 "~" H 1250 10300 50  0001 C CNN "Digikey#"
+F 5 "~" H 1250 10300 50  0001 C CNN "Reichelt#"
+	1    1250 10300
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1050 10100 900  10100
+$Comp
+L power:+3V3 #PWR0121
+U 1 1 5E0DC5C8
+P 900 10050
+F 0 "#PWR0121" H 900 9900 50  0001 C CNN
+F 1 "+3V3" H 915 10223 50  0000 C CNN
+F 2 "" H 900 10050 50  0001 C CNN
+F 3 "" H 900 10050 50  0001 C CNN
+	1    900  10050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	900  10100 900  10050
+Text Label 4750 2550 2    50   ~ 0
+TX
+Text Label 4750 2650 2    50   ~ 0
+RX
+Wire Wire Line
+	3950 2550 4750 2550
+Wire Wire Line
+	3950 2650 4750 2650
+Text Notes 700  9600 0    118  ~ 24
+UART
+Text Notes 14700 800  0    118  ~ 24
+Power LED
+Text Notes 8400 800  0    118  ~ 24
+Power Input
+Wire Notes Line
+	6250 550  6250 9150
+Wire Notes Line
+	6250 9150 500  9150
+Wire Wire Line
+	9050 2500 9250 2500
+Wire Wire Line
+	9050 2300 9150 2300
+Wire Wire Line
+	9350 2100 9350 2500
+Wire Wire Line
+	9600 2100 9600 2300
+Connection ~ 9600 2300
+Wire Wire Line
+	9600 2300 9950 2300
+Text Notes 6900 4300 0    118  ~ 24
+Driver Circuit
+$Comp
+L power:GNDPWR #PWR0108
+U 1 1 5E1869AF
+P 8750 7950
+F 0 "#PWR0108" H 8750 7750 50  0001 C CNN
+F 1 "GNDPWR" H 8754 7796 50  0000 C CNN
+F 2 "" H 8750 7900 50  0001 C CNN
+F 3 "" H 8750 7900 50  0001 C CNN
+	1    8750 7950
+	1    0    0    -1  
+$EndComp
+Text Notes 11900 7750 0    50   ~ 0
+Replacement candidate for the NCV8402xSTT1G:\nVNN3NV04P-E, VNS3NV04P-E, BSP 78, BSP 76\n(to be checked)
+Text Notes 7050 4900 0    50   ~ 0
+ * Switch 5-24V, max 2A DC load (could be inductive)\n * LED indicator to show current state\n * Switch to overwrite Raspberry PI\n * No damage at reverse connection\n * No damage on short circuit/overload\n * Output ESD protected\n * Galvanic isolation
+$Comp
+L Device:R R3
+U 1 1 5E1DFEF2
+P 11100 5450
+F 0 "R3" H 11170 5496 50  0000 L CNN
+F 1 "DNM" H 11170 5405 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 11030 5450 50  0001 C CNN
+F 3 "~" H 11100 5450 50  0001 C CNN
+F 4 "~" H 11100 5450 50  0001 C CNN "Digikey#"
+F 5 "~" H 11100 5450 50  0001 C CNN "Reichelt#"
+	1    11100 5450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 5E1E0921
+P 15550 1700
+F 0 "R4" H 15620 1746 50  0000 L CNN
+F 1 "DNM" H 15620 1655 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 15480 1700 50  0001 C CNN
+F 3 "~" H 15550 1700 50  0001 C CNN
+F 4 "~" H 15550 1700 50  0001 C CNN "Digikey#"
+F 5 "~" H 15550 1700 50  0001 C CNN "Reichelt#"
+	1    15550 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x02 J7
+U 1 1 5E2066EA
+P 8850 2900
+F 0 "J7" H 8930 2892 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 8930 2801 50  0000 L CNN
+F 2 "Connector_Phoenix_MSTB:PhoenixContact_MSTBA_2,5_2-G_1x02_P5.00mm_Horizontal" H 8850 2900 50  0001 C CNN
+F 3 "~" H 8850 2900 50  0001 C CNN
+F 4 "277-1117-ND, 277-1000-ND" H 8850 2900 50  0001 C CNN "Digikey#"
+	1    8850 2900
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9050 2800 9150 2800
+Wire Wire Line
+	9150 2800 9150 2300
+Connection ~ 9150 2300
+Wire Wire Line
+	9150 2300 9600 2300
+Wire Wire Line
+	9050 2900 9250 2900
+Wire Wire Line
+	9250 2900 9250 2500
+Connection ~ 9250 2500
+Wire Wire Line
+	9250 2500 9350 2500
+$Comp
+L power:VCC #PWR0111
+U 1 1 5E061DBE
+P 10500 5000
+F 0 "#PWR0111" H 10500 4850 50  0001 C CNN
+F 1 "VCC" H 10517 5173 50  0000 C CNN
+F 2 "" H 10500 5000 50  0001 C CNN
+F 3 "" H 10500 5000 50  0001 C CNN
+	1    10500 5000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10500 5000 10500 5350
+Wire Wire Line
+	10500 5950 10500 6050
+Wire Wire Line
+	10900 5650 11100 5650
+Wire Wire Line
+	11100 5650 11100 5950
+Wire Wire Line
+	11100 5600 11100 5650
+Connection ~ 11100 5650
+$Comp
+L power:VCC #PWR0122
+U 1 1 5E08C370
+P 11100 5000
+F 0 "#PWR0122" H 11100 4850 50  0001 C CNN
+F 1 "VCC" H 11117 5173 50  0000 C CNN
+F 2 "" H 11100 5000 50  0001 C CNN
+F 3 "" H 11100 5000 50  0001 C CNN
+	1    11100 5000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	11100 5000 11100 5300
+Text Notes 12850 4550 0    50   ~ 0
+You could mount R3/R4 instead\nof the constant current supply \nU3/U4, but the LED current would \nvary with supply voltage.
+$Comp
+L Connector:Screw_Terminal_01x03 J8
+U 1 1 5E09DEEC
+P 14400 6650
+F 0 "J8" H 14480 6692 50  0000 L CNN
+F 1 "Screw_Terminal_01x03" H 14480 6601 50  0000 L CNN
+F 2 "Connector_Phoenix_MSTB:PhoenixContact_MSTBA_2,5_3-G_1x03_P5.00mm_Horizontal" H 14400 6650 50  0001 C CNN
+F 3 "~" H 14400 6650 50  0001 C CNN
+F 4 "277-1107-ND, 277-1012-ND " H 14400 6650 50  0001 C CNN "Digikey#"
+	1    14400 6650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	15550 2500 15550 2700
+$Comp
+L other:NCR401U U4
+U 1 1 5E0B84F1
+P 14950 1900
+F 0 "U4" H 15150 2150 50  0000 L CNN
+F 1 "NCR401U" H 14500 2150 50  0000 L CNN
+F 2 "Package_SO:SC-74-6_1.5x2.9mm_P0.95mm" H 14950 1850 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/NCR401U.pdf" H 14950 1900 50  0001 C CNN
+F 4 "1727-2253-1-ND" H 14950 1900 50  0001 C CNN "Digikey#"
+F 5 "n.a." H 14950 1900 50  0001 C CNN "Reichelt#"
+	1    14950 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0110
+U 1 1 5E0B84F8
+P 14950 1250
+F 0 "#PWR0110" H 14950 1100 50  0001 C CNN
+F 1 "VCC" H 14967 1423 50  0000 C CNN
+F 2 "" H 14950 1250 50  0001 C CNN
+F 3 "" H 14950 1250 50  0001 C CNN
+	1    14950 1250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	14950 1250 14950 1600
+Wire Wire Line
+	14950 2200 14950 2300
+Wire Wire Line
+	15350 1900 15550 1900
+Wire Wire Line
+	15550 1900 15550 2200
+Wire Wire Line
+	15550 1850 15550 1900
+Connection ~ 15550 1900
+$Comp
+L power:VCC #PWR0126
+U 1 1 5E0B850A
+P 15550 1250
+F 0 "#PWR0126" H 15550 1100 50  0001 C CNN
+F 1 "VCC" H 15567 1423 50  0000 C CNN
+F 2 "" H 15550 1250 50  0001 C CNN
+F 3 "" H 15550 1250 50  0001 C CNN
+	1    15550 1250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	15550 1250 15550 1550
+$Comp
+L power:GNDPWR #PWR0127
+U 1 1 5E0BD492
+P 15550 2700
+F 0 "#PWR0127" H 15550 2500 50  0001 C CNN
+F 1 "GNDPWR" H 15554 2546 50  0000 C CNN
+F 2 "" H 15550 2650 50  0001 C CNN
+F 3 "" H 15550 2650 50  0001 C CNN
+	1    15550 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D_Zener D3
+U 1 1 5E0F3D51
+P 10550 7350
+F 0 "D3" V 10504 7429 50  0000 L CNN
+F 1 "10V Zener" V 10595 7429 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-123" H 10550 7350 50  0001 C CNN
+F 3 "~" H 10550 7350 50  0001 C CNN
+F 4 "BZT52C10-TPMSCT-ND" H 10550 7350 50  0001 C CNN "Digikey#"
+F 5 "n.a" H 10550 7350 50  0001 C CNN "Reichelt#"
+	1    10550 7350
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GNDPWR #PWR0123
+U 1 1 5E0F4F5B
+P 10550 7800
+F 0 "#PWR0123" H 10550 7600 50  0001 C CNN
+F 1 "GNDPWR" H 10554 7646 50  0000 C CNN
+F 2 "" H 10550 7750 50  0001 C CNN
+F 3 "" H 10550 7750 50  0001 C CNN
+	1    10550 7800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10550 7500 10550 7800
+Wire Wire Line
+	10550 7200 10550 6900
+Connection ~ 10550 6900
+Wire Wire Line
+	10550 6900 10750 6900
+Wire Wire Line
+	9950 1100 9950 2300
+Text Notes 10050 800  0    118  ~ 24
+Reverse Polarity Protection
+Text Notes 1900 9600 0    118  ~ 24
+Button
+Text Notes 9700 3250 0    50   ~ 0
+The fully protected MOSFET is\noverkill, but it is already used\nfor the driver circuit (BoM\noptimization)
+Wire Wire Line
+	13950 6750 14200 6750
+Wire Wire Line
+	2350 2850 1850 2850
+Text Label 1850 2850 0    50   ~ 0
+BCM17
+$Comp
+L Connector:Conn_01x03_Male J2
+U 1 1 5E22A51D
+P 4750 10100
+F 0 "J2" H 4722 10032 50  0000 R CNN
+F 1 "SSH" H 4722 10123 50  0000 R CNN
+F 2 "Connector_PinHeader_1.27mm:PinHeader_1x03_P1.27mm_Vertical" H 4750 10100 50  0001 C CNN
+F 3 "~" H 4750 10100 50  0001 C CNN
+F 4 "~" H 4750 10100 50  0001 C CNN "Digikey#"
+F 5 "~" H 4750 10100 50  0001 C CNN "Reichelt#"
+	1    4750 10100
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:+3V3 #PWR0109
+U 1 1 5E22AAE0
+P 4400 9850
+F 0 "#PWR0109" H 4400 9700 50  0001 C CNN
+F 1 "+3V3" H 4415 10023 50  0000 C CNN
+F 2 "" H 4400 9850 50  0001 C CNN
+F 3 "" H 4400 9850 50  0001 C CNN
+	1    4400 9850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0128
+U 1 1 5E22B84B
+P 4400 10650
+F 0 "#PWR0128" H 4400 10400 50  0001 C CNN
+F 1 "GND" H 4405 10477 50  0000 C CNN
+F 2 "" H 4400 10650 50  0001 C CNN
+F 3 "" H 4400 10650 50  0001 C CNN
+	1    4400 10650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4550 10000 4400 10000
+Wire Wire Line
+	4400 10000 4400 9850
+Wire Wire Line
+	4550 10200 4400 10200
+Wire Wire Line
+	4400 10200 4400 10550
+$Comp
+L Device:R R9
+U 1 1 5E2510E7
+P 4150 10350
+F 0 "R9" H 4220 10396 50  0000 L CNN
+F 1 "1k" H 4220 10305 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4080 10350 50  0001 C CNN
+F 3 "~" H 4150 10350 50  0001 C CNN
+F 4 "~" H 4150 10350 50  0001 C CNN "Digikey#"
+F 5 "~" H 4150 10350 50  0001 C CNN "Reichelt#"
+	1    4150 10350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 10100 4150 10100
+Wire Wire Line
+	4400 10550 4150 10550
+Wire Wire Line
+	4150 10550 4150 10500
+Connection ~ 4400 10550
+Wire Wire Line
+	4400 10550 4400 10650
+Wire Wire Line
+	4150 10200 4150 10100
+Connection ~ 4150 10100
+Wire Wire Line
+	4150 10100 4550 10100
+$Comp
+L Device:R R7
+U 1 1 5E269CCC
+P 2650 10050
+F 0 "R7" H 2720 10096 50  0000 L CNN
+F 1 "1k" H 2720 10005 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2580 10050 50  0001 C CNN
+F 3 "~" H 2650 10050 50  0001 C CNN
+F 4 "~" H 2650 10050 50  0001 C CNN "Digikey#"
+F 5 "~" H 2650 10050 50  0001 C CNN "Reichelt#"
+	1    2650 10050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 9900 2650 9750
+$Comp
+L power:+3V3 #PWR0129
+U 1 1 5E276E7F
+P 2650 9750
+F 0 "#PWR0129" H 2650 9600 50  0001 C CNN
+F 1 "+3V3" H 2665 9923 50  0000 C CNN
+F 2 "" H 2650 9750 50  0001 C CNN
+F 3 "" H 2650 9750 50  0001 C CNN
+	1    2650 9750
+	1    0    0    -1  
+$EndComp
+Text Notes 2000 10950 0    50   ~ 0
+For future use\n(e.g. PIN change)
+NoConn ~ 2350 2750
+NoConn ~ 1150 2550
+NoConn ~ 1150 2650
+Wire Wire Line
+	2350 2950 1850 2950
+Text Label 1850 2950 0    50   ~ 0
+BCM27
+Text Label 6500 5950 0    50   ~ 0
+BCM27
+Wire Wire Line
+	2650 10200 2650 10400
+Connection ~ 2650 10400
+Wire Wire Line
+	2650 10400 2700 10400
+Text Label 1950 10400 0    50   ~ 0
+BCM6
+$Comp
+L power:PWR_FLAG #FLG0101
+U 1 1 5E36A455
+P 6800 900
+F 0 "#FLG0101" H 6800 975 50  0001 C CNN
+F 1 "PWR_FLAG" H 6800 1073 50  0000 C CNN
+F 2 "" H 6800 900 50  0001 C CNN
+F 3 "~" H 6800 900 50  0001 C CNN
+	1    6800 900 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6800 900  6800 1000
+Wire Wire Line
+	6800 1000 7150 1000
+Wire Wire Line
+	7150 1000 7150 900 
+$Comp
+L power:GNDPWR #PWR0131
+U 1 1 5E37204D
+P 6800 2500
+F 0 "#PWR0131" H 6800 2300 50  0001 C CNN
+F 1 "GNDPWR" H 6804 2346 50  0000 C CNN
+F 2 "" H 6800 2450 50  0001 C CNN
+F 3 "" H 6800 2450 50  0001 C CNN
+	1    6800 2500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6800 2500 6800 2400
+Wire Wire Line
+	6800 2400 7200 2400
+Wire Wire Line
+	7200 2400 7200 2500
+$Comp
+L power:PWR_FLAG #FLG0102
+U 1 1 5E379946
+P 7200 2500
+F 0 "#FLG0102" H 7200 2575 50  0001 C CNN
+F 1 "PWR_FLAG" H 7200 2673 50  0000 C CNN
+F 2 "" H 7200 2500 50  0001 C CNN
+F 3 "~" H 7200 2500 50  0001 C CNN
+	1    7200 2500
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:VCC #PWR0104
+U 1 1 5E381289
+P 7150 900
+F 0 "#PWR0104" H 7150 750 50  0001 C CNN
+F 1 "VCC" H 7167 1073 50  0000 C CNN
+F 2 "" H 7150 900 50  0001 C CNN
+F 3 "" H 7150 900 50  0001 C CNN
+	1    7150 900 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0130
+U 1 1 5E381DE0
+P 12700 950
+F 0 "#PWR0130" H 12700 800 50  0001 C CNN
+F 1 "VCC" H 12717 1123 50  0000 C CNN
+F 2 "" H 12700 950 50  0001 C CNN
+F 3 "" H 12700 950 50  0001 C CNN
+	1    12700 950 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0119
+U 1 1 5E3DC5C5
+P 3150 4400
+F 0 "#PWR0119" H 3150 4150 50  0001 C CNN
+F 1 "GND" H 3150 4250 50  0000 C CNN
+F 2 "" H 3150 4400 50  0000 C CNN
+F 3 "" H 3150 4400 50  0000 C CNN
+	1    3150 4400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3150 4350 3150 4400
+NoConn ~ 2350 3050
+NoConn ~ 2350 3150
+NoConn ~ 2350 3250
+NoConn ~ 2350 3350
+NoConn ~ 2350 3550
+NoConn ~ 2350 3750
+NoConn ~ 2350 3850
+NoConn ~ 2350 3950
+$Comp
+L Connector_Generic:Conn_01x03 J5
+U 1 1 5E4BC9C1
+P 14400 5950
+F 0 "J5" H 14318 5625 50  0000 C CNN
+F 1 "Conn_01x03" H 14318 5716 50  0000 C CNN
+F 2 "project_footprints:WAGO_250-403_1x03_P2.5" H 14400 5950 50  0001 C CNN
+F 3 "~" H 14400 5950 50  0001 C CNN
+F 4 "~" H 14400 5950 50  0001 C CNN "Digikey#"
+F 5 "WAGO 250-403" H 14400 5950 50  0001 C CNN "Reichelt#"
+	1    14400 5950
+	1    0    0    1   
+$EndComp
+Text Label 13950 6050 0    50   ~ 0
+PGND
+Text Label 13950 6750 0    50   ~ 0
+PGND
+$Comp
+L Device:Jumper_NC_Small JP3
+U 1 1 5E52C371
+P 3900 10100
+F 0 "JP3" H 3900 10364 50  0000 C CNN
+F 1 "Jumper_Switch_SSH" H 3900 10273 50  0000 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm" H 3900 10100 50  0001 C CNN
+F 3 "~" H 3900 10100 50  0001 C CNN
+F 4 "~" H 3900 10100 50  0001 C CNN "Digikey#"
+F 5 "~" H 3900 10100 50  0001 C CNN "Reichelt#"
+	1    3900 10100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3450 10100 3800 10100
+Text Label 10050 2500 0    50   ~ 0
+PGND
+$Comp
+L power:GNDPWR #PWR0117
+U 1 1 5E54F8B0
+P 14950 2300
+F 0 "#PWR0117" H 14950 2100 50  0001 C CNN
+F 1 "GNDPWR" H 14954 2146 50  0000 C CNN
+F 2 "" H 14950 2250 50  0001 C CNN
+F 3 "" H 14950 2250 50  0001 C CNN
+	1    14950 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GNDPWR #PWR0118
+U 1 1 5E54FED8
+P 10500 6050
+F 0 "#PWR0118" H 10500 5850 50  0001 C CNN
+F 1 "GNDPWR" H 10504 5896 50  0000 C CNN
+F 2 "" H 10500 6000 50  0001 C CNN
+F 3 "" H 10500 6000 50  0001 C CNN
+	1    10500 6050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Jumper:Jumper_2_Open JP4
+U 1 1 5E5B198B
+P 8600 6500
+F 0 "JP4" V 8646 6412 50  0000 R CNN
+F 1 "Jumper_SSH_PIN" V 8555 6412 50  0000 R CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 8600 6500 50  0001 C CNN
+F 3 "~" H 8600 6500 50  0001 C CNN
+F 4 "~" H 8600 6500 50  0001 C CNN "Digikey#"
+F 5 "~" H 8600 6500 50  0001 C CNN "Reichelt#"
+	1    8600 6500
+	0    1    1    0   
+$EndComp
+NoConn ~ 8900 6400
+Text Notes 5300 10950 0    50   ~ 0
+The pull-up/down resistors can be\nleft out if the internal resistors are\nenabled
+$Comp
+L Graphic:Logo_Open_Hardware_Small LOGO1
+U 1 1 5E0EA202
+P 15600 9650
+F 0 "LOGO1" H 15600 9925 50  0001 C CNN
+F 1 "Logo_Open_Hardware_Small" H 15600 9425 50  0001 C CNN
+F 2 "Symbol:OSHW-Symbol_6.7x6mm_Copper" H 15600 9650 50  0001 C CNN
+F 3 "~" H 15600 9650 50  0001 C CNN
+	1    15600 9650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	13400 5950 13400 5850
+Connection ~ 13400 5850
+Wire Wire Line
+	13400 5850 13850 5850
+Wire Wire Line
+	13400 6250 13400 6300
+Connection ~ 13400 6300
+Wire Wire Line
+	13400 6300 13750 6300
+$Comp
+L Device:R R10
+U 1 1 5E12A291
+P 11650 5800
+F 0 "R10" H 11720 5846 50  0000 L CNN
+F 1 "1K" H 11720 5755 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 11580 5800 50  0001 C CNN
+F 3 "~" H 11650 5800 50  0001 C CNN
+	1    11650 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J4
+U 1 1 5E12AE4A
+P 11450 5350
+F 0 "J4" H 11500 5550 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 11200 5450 50  0000 C CNN
+F 2 "Connector_PinHeader_1.27mm:PinHeader_1x02_P1.27mm_Vertical" H 11450 5350 50  0001 C CNN
+F 3 "~" H 11450 5350 50  0001 C CNN
+	1    11450 5350
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	11650 5650 11650 5450
+Wire Wire Line
+	11650 5350 11650 5000
+$Comp
+L power:VCC #PWR0132
+U 1 1 5E1387D9
+P 11650 5000
+F 0 "#PWR0132" H 11650 4850 50  0001 C CNN
+F 1 "VCC" H 11667 5173 50  0000 C CNN
+F 2 "" H 11650 5000 50  0001 C CNN
+F 3 "" H 11650 5000 50  0001 C CNN
+	1    11650 5000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	11650 5950 11650 6300
+Connection ~ 11650 6300
+Wire Wire Line
+	14200 5850 13850 5850
+Connection ~ 13850 5850
+Wire Wire Line
+	14200 5950 13750 5950
+Wire Wire Line
+	13750 5950 13750 6300
+Connection ~ 13750 6300
+Wire Wire Line
+	13950 6050 14200 6050
+Wire Wire Line
+	13400 4950 13400 5850
+Text Notes 11750 5450 0    50   ~ 0
+J4: Enable optional\nPull-Up
+Wire Wire Line
+	11650 6300 13400 6300
+Text Label 11800 6300 0    50   ~ 0
+D
+$Comp
+L other:NCR401U U3
+U 1 1 5E050397
+P 10500 5650
+F 0 "U3" H 10700 5900 50  0000 L CNN
+F 1 "NCR401U" H 10050 5900 50  0000 L CNN
+F 2 "Package_SO:SC-74-6_1.5x2.9mm_P0.95mm" H 10500 5600 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/NCR401U.pdf" H 10500 5650 50  0001 C CNN
+F 4 "1727-2253-1-ND" H 10500 5650 50  0001 C CNN "Digikey#"
+F 5 "n.a." H 10500 5650 50  0001 C CNN "Reichelt#"
+	1    10500 5650
+	1    0    0    -1  
+$EndComp
+Connection ~ 12700 1100
+Wire Wire Line
+	12700 1100 12700 2150
+Wire Wire Line
+	12700 950  12700 1100
+Connection ~ 9350 2500
+Connection ~ 12700 2500
+Wire Wire Line
+	12700 2500 12700 2550
+Wire Wire Line
+	12700 2450 12700 2500
+Wire Wire Line
+	9350 2500 10650 2500
+Wire Wire Line
+	11050 1100 12700 1100
+Wire Wire Line
+	12050 1550 12050 2000
+Wire Wire Line
+	11050 1550 11050 1600
+Connection ~ 11050 1550
+Wire Wire Line
+	11050 1550 12050 1550
+Wire Wire Line
+	11050 1450 11050 1550
+Connection ~ 11050 1100
+Wire Wire Line
+	11050 1100 11050 1150
+$Comp
+L Device:R R5
+U 1 1 5E16A5D0
+P 11050 1300
+F 0 "R5" H 11120 1346 50  0000 L CNN
+F 1 "10k" H 11120 1255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10980 1300 50  0001 C CNN
+F 3 "~" H 11050 1300 50  0001 C CNN
+F 4 "~" H 11050 1300 50  0001 C CNN "Digikey#"
+F 5 "~" H 11050 1300 50  0001 C CNN "Reichelt#"
+	1    11050 1300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9950 1100 11050 1100
+Wire Wire Line
+	12050 2500 12700 2500
+Connection ~ 12050 2500
+Wire Wire Line
+	12050 2300 12050 2500
+$Comp
+L Device:D_Zener D5
+U 1 1 5E123F0C
+P 12050 2150
+F 0 "D5" V 12004 2229 50  0000 L CNN
+F 1 "10V Zener" V 12095 2229 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-123" H 12050 2150 50  0001 C CNN
+F 3 "~" H 12050 2150 50  0001 C CNN
+F 4 "BZT52C10-TPMSCT-ND" H 12050 2150 50  0001 C CNN "Digikey#"
+F 5 "n.a" H 12050 2150 50  0001 C CNN "Reichelt#"
+	1    12050 2150
+	0    1    1    0   
+$EndComp
+$Comp
+L other:NCV8402xSTT1G Q2
+U 1 1 5E100052
+P 11150 2200
+F 0 "Q2" H 11678 2246 50  0000 L CNN
+F 1 "NCV8402xSTT1G" H 11678 2155 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-223" H 11150 1750 50  0001 C CNN
+F 3 "https://www.onsemi.com/pub/Collateral/NCV8402-D.PDF" H 11450 2300 50  0001 C CNN
+F 4 "NCV8402ASTT1GOSCT-ND" H 11150 2200 50  0001 C CNN "Digikey#"
+F 5 "n.a." H 11150 2200 50  0001 C CNN "Reichelt#"
+	1    11150 2200
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	11650 2500 12050 2500
+$Comp
+L raspberrypi_hat:OX40HAT J3
+U 1 1 58DFC771
+P 3150 3150
+F 0 "J3" H 3700 4200 50  0000 C CNN
+F 1 "40HAT" H 2700 4200 50  0000 C CNN
+F 2 "project_footprints:Raspberry_Pi_Addon_THT_With_Cutouts" H 3150 3350 50  0001 C CNN
+F 3 "~" H 2450 3150 50  0000 C CNN
+F 4 "RPI HEADER 40" H 3150 3150 50  0001 C CNN "Reichelt#"
+F 5 "?" H 3150 3150 50  0001 C CNN "Digikey#"
+	1    3150 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3950 2750 4750 2750
+Wire Wire Line
+	3950 2850 4750 2850
+Wire Wire Line
+	3950 2950 4750 2950
+Wire Wire Line
+	3950 3050 4750 3050
+Wire Wire Line
+	3950 3150 4750 3150
+Wire Wire Line
+	3950 3250 4750 3250
+Wire Wire Line
+	3950 3450 4750 3450
+Wire Wire Line
+	3950 3550 4750 3550
+Wire Wire Line
+	3950 3650 4750 3650
+Wire Wire Line
+	3950 3750 4750 3750
+NoConn ~ 4750 2750
+NoConn ~ 4750 2850
+NoConn ~ 4750 2950
+NoConn ~ 4750 3050
+NoConn ~ 4750 3150
+NoConn ~ 4750 3250
+NoConn ~ 4750 3450
+NoConn ~ 4750 3550
+NoConn ~ 4750 3650
+NoConn ~ 4750 3750
+Text Label 4750 2750 2    50   ~ 0
+BCM18
+Text Label 4750 2850 2    50   ~ 0
+BCM23
+Text Label 4750 2950 2    50   ~ 0
+BCM24
+Text Label 4750 3050 2    50   ~ 0
+BCM25
+Text Label 4750 3150 2    50   ~ 0
+BCM8
+Text Label 4750 3250 2    50   ~ 0
+BCM7
+Text Label 4750 3450 2    50   ~ 0
+BCM12
+Text Label 4750 3550 2    50   ~ 0
+BCM16
+Text Label 4750 3650 2    50   ~ 0
+BCM20
+Text Label 4750 3750 2    50   ~ 0
+BCM21
+$Comp
+L power:+5V #PWR0103
+U 1 1 5E1B63CD
+P 3250 1850
+F 0 "#PWR0103" H 3250 1700 50  0001 C CNN
+F 1 "+5V" H 3265 2023 50  0000 C CNN
+F 2 "" H 3250 1850 50  0001 C CNN
+F 3 "" H 3250 1850 50  0001 C CNN
+	1    3250 1850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 1850 3250 1950
+Wire Wire Line
+	8600 6150 8550 6150
+Wire Wire Line
+	8600 5950 8550 5950
+$Comp
+L Switch:SW_SP3T SW1
+U 1 1 5E5EFF4A
+P 8900 6600
+F 0 "SW1" V 8854 6746 50  0000 L CNN
+F 1 "CSS-1310TB" V 8945 6746 50  0000 L CNN
+F 2 "project_footprints:CSS-131XB" H 8275 6775 50  0001 C CNN
+F 3 "~" H 8275 6775 50  0001 C CNN
+F 4 "563-1095-1-ND" H 8900 6600 50  0001 C CNN "Digikey#"
+F 5 "n.a." H 8900 6600 50  0001 C CNN "Reichelt#"
+	1    8900 6600
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	8900 6900 8900 6800
+Connection ~ 8900 6900
+Wire Wire Line
+	8600 6300 8600 6150
+Wire Wire Line
+	8600 6700 8600 6900
+Wire Wire Line
+	8800 6400 8800 6150
+Wire Wire Line
+	8800 6150 8600 6150
+Connection ~ 8600 6150
+Wire Wire Line
+	8750 7300 8750 7950
+Wire Wire Line
+	8600 5350 8600 5400
+Text Notes 9050 7350 0    50   ~ 0
+Max current, depends on clamping voltage\nof input and supply voltage.\nWorst case: 24V supply, 10V clamping:\nI=14V/1kOhm=1,4mA
+Wire Wire Line
+	8750 7000 8750 6900
+Wire Wire Line
+	8600 6900 8750 6900
+Wire Wire Line
+	8750 6900 8900 6900
+Connection ~ 8750 6900
+Wire Wire Line
+	8900 6900 10550 6900
+$Comp
+L Device:R R2
+U 1 1 5DEEABFE
+P 8750 7150
+F 0 "R2" H 8820 7196 50  0000 L CNN
+F 1 "4.7k" H 8820 7105 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8680 7150 50  0001 C CNN
+F 3 "~" H 8750 7150 50  0001 C CNN
+F 4 "~" H 8750 7150 50  0001 C CNN "Digikey#"
+F 5 "~" H 8750 7150 50  0001 C CNN "Reichelt#"
+	1    8750 7150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R12
+U 1 1 5E1F055F
+P 8600 5550
+F 0 "R12" H 8670 5596 50  0000 L CNN
+F 1 "1k" H 8670 5505 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8530 5550 50  0001 C CNN
+F 3 "~" H 8600 5550 50  0001 C CNN
+F 4 "~" H 8600 5550 50  0001 C CNN "Digikey#"
+F 5 "~" H 8600 5550 50  0001 C CNN "Reichelt#"
+	1    8600 5550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8600 5700 8600 5800
+Wire Wire Line
+	8600 5800 9000 5800
+Connection ~ 8600 5800
+Wire Wire Line
+	8600 5800 8600 5950
+Wire Wire Line
+	9000 5800 9000 6400
+$Comp
+L Device:R R13
+U 1 1 5E21C72C
+P 9900 5900
+F 0 "R13" H 9970 5946 50  0000 L CNN
+F 1 "DNM" H 9970 5855 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 9830 5900 50  0001 C CNN
+F 3 "~" H 9900 5900 50  0001 C CNN
+	1    9900 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10100 5650 9900 5650
+Wire Wire Line
+	9900 5650 9900 5750
+Wire Wire Line
+	9900 6050 9900 6150
+$Comp
+L power:GNDPWR #PWR0133
+U 1 1 5E22C99F
+P 9900 6150
+F 0 "#PWR0133" H 9900 5950 50  0001 C CNN
+F 1 "GNDPWR" H 9904 5996 50  0000 C CNN
+F 2 "" H 9900 6100 50  0001 C CNN
+F 3 "" H 9900 6100 50  0001 C CNN
+	1    9900 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R14
+U 1 1 5E22EF95
+P 14350 2150
+F 0 "R14" H 14420 2196 50  0000 L CNN
+F 1 "DNM" H 14420 2105 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 14280 2150 50  0001 C CNN
+F 3 "~" H 14350 2150 50  0001 C CNN
+	1    14350 2150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	14550 1900 14350 1900
+Wire Wire Line
+	14350 1900 14350 2000
+Wire Wire Line
+	14350 2300 14350 2400
+$Comp
+L power:GNDPWR #PWR0134
+U 1 1 5E22EF9E
+P 14350 2400
+F 0 "#PWR0134" H 14350 2200 50  0001 C CNN
+F 1 "GNDPWR" H 14354 2246 50  0000 C CNN
+F 2 "" H 14350 2350 50  0001 C CNN
+F 3 "" H 14350 2350 50  0001 C CNN
+	1    14350 2400
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

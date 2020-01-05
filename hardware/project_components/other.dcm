@@ -1,0 +1,15 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP NCR401U
+D 10mA linear Driver (with extrnal R up to 60mA), max 40V
+K LED driver constant current
+F https://assets.nexperia.com/documents/data-sheet/NCR401U.pdf
+$ENDCMP
+#
+$CMP NCV8402xSTT1G
+D Self-Protected Low Side Driver with Temperature and Current Limit
+K MOSFET ESD Overcurrent
+F https://www.onsemi.com/pub/Collateral/NCV8402-D.PDF
+$ENDCMP
+#
+#End Doc Library
