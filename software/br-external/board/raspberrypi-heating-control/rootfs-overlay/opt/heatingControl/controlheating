@@ -2,7 +2,7 @@
 
 
 # Pin to control the heating
-MyPin="17"
+MyPin="27"
 
 # File to save last state
 LastStateFile="/media/persistent/last_state"
