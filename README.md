@@ -51,9 +51,10 @@ The GPIO Pins of the raspberry pi are used to switch a relay, that controls the 
 
 ## How to build the sd card image
 1. Clone repository (use `--recursive` to get buildroot submodule)
-2. `make BR2_EXTERNAL=$PWD/br-external -C buildroot raspberrypi2-heating-control_defconfig`
-3. `make -C buildroot`
-4. write `buildroot/output/images/sdcard.img` to sd card (e.g. `dd if=buildroot/output/images/sdcard.img of=/dev/mmcblk0 bs=1M && sync`)
+2. Change into software folder (`cd software`)
+3. `make BR2_EXTERNAL=$PWD/br-external -C buildroot raspberrypi2-heating-control_defconfig`
+4. `make -C buildroot`
+5. write `buildroot/output/images/sdcard.img` to sd card (e.g. `dd if=buildroot/output/images/sdcard.img of=/dev/mmcblk0 bs=1M && sync`)
 
 ## Hardware
 TBD
