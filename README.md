@@ -71,6 +71,7 @@ TBD
     - SIP configuration file: `/etc/asterisk/sip.conf`
     - Dialplan (phone menu, pin): `/etc/asterisk/extensions.conf`
  * The configuration is based on the raspberry pi 2 configuration. It should be easily adjusted to newer versions. It probably even boots, but the serial console is most likely broken, due to a hardware difference.
+ * The dhcp client was configured to run in the background. This is useful if the network link isn't ready when we try to get an ip address. This archived with a custom busybox configuration with the option `CONFIG_IFUPDOWN_UDHCPC_CMD_OPTIONS="-R -n -b"`. The option `-b` sets udhcpc to run in the background. 
 
 ## Overview of files
 ```
@@ -78,16 +79,16 @@ TBD
 │  └── <infos about the audio file generation>
 ├──buildroot
 └──br-external
-   ├── board
-   │   └── raspberrypi2-heating-control
-   │       ├── genimage-raspberrypi2-heating-control.cfg
-   │       ├── post-build.sh
-   │       ├── post-image.sh
-   │       └── rootfs-overlay
-   │           └── <config files and scripts>
+   ├── board
+   │   └── raspberrypi2-heating-control
+   │       ├── genimage-raspberrypi2-heating-control.cfg
+   │       ├── post-build.sh
+   │       ├── post-image.sh
+   │       └── rootfs-overlay
+   │           └── <config files and scripts>
    ├── Config.in
    ├── configs
-   │   └── raspberrypi2-heating-control_defconfig
+   │   └── raspberrypi2-heating-control_defconfig
    ├── external.desc
    └── external.mk
 ```
