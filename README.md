@@ -3,7 +3,9 @@ SIP Heating Gateway
 
 This device allows you to control the heating (or any other device) by calling in and using an interactive voice menu. In case of a power loss the last state will be restored as soon as the power is back. The software is build to survive unexpected power losses.
 
-The heart of the system is a Raspberry pi with a custom hat to provide 12V to an external relay. On this Raspberry pi a custom embedded linux is used to to control the 12V via a small shell script. The heavy lifting for the SIP connection and the voice menu is done by asterisk, which uses the already mentioned shell script. The linux system is build with buildroot and the hole image image is less than 200MB and boots in a few seconds.
+The heart of the system is a Raspberry pi with a custom hat to provide 12V to an external relay. On this Raspberry pi a custom embedded linux is used to to control the 12V via a small shell script. It connects via ethernet to the a SIP server (e.g. a fritzbox router or your isp). The heavy lifting for the SIP connection and the voice menu is done by asterisk, which uses the already mentioned shell script to switch a gpio pin. The linux system is build with buildroot and the hole image image is less than 200MB and boots in a few seconds.
+
+The raspberry pi is configured to use the micro sd card as read only storage. This should prevent damage on power failure. The only exception is a persitent partition, which is used to save the current state. This state will be restored in case of a power failure. The partition should also be safe from corruption due to the mount parameters and the infrequent writes.
 
 ## Usage
 
@@ -36,20 +38,14 @@ The custom embedded system is based on buildroot. The behaviour at a call is con
  * `/etc/asterisk/extensions.conf`
    Dialplan (phone menu, pin)
 
-The configuration files can be adjusted by changing the files at the overlay (`br-external/board/raspberrypi2-heating-control/rootfs-overlay`. Note that you also have to adjust `br-external/board/raspberrypi-heating-control/post-build.sh`, since it modifies `/etc/hosts` to set the ip of the SIP server.
+The configuration files can be adjusted by changing the files at the overlay (`br-external/board/raspberrypi2-heating-control/rootfs-overlay`. Note that you also have to adjust `br-external/board/raspberrypi-heating-control/post-build.sh`, since it modifies `/etc/hosts` to set the ip address of the SIP server. Asterisk is configured to only use a minimal amount of modules. Modify `/etc/asterisk/modules.conf` if necessary.
 
-It is also possible to connect to the device via a serial connection (115200 8N1) or HDMI (untested). The system is by default read-only. To modify the file system it has to be remounted (`mount -o remount,rw /`). The login data is:
+For maintenace and debugging it is possible to connect to the device via a serial connection (115200 8N1) or HDMI. The system is by default read-only. To modify the file system it has to be remounted (`mount -o remount,rw /`). The login data is:
 
 username: "root"
 password: ""
 (There is no root password. This is no problem, since there is no way to login remotely)
 
-## Working principle
-This device is based on a raspberry pi. The raspberry pi connects via ethernet to the a SIP server (e.g. a fritzbox router or your isp). The SIP connection and the voice menu is handled by the software asterisk, which is installed on the raspberry pi.
-
-The raspberry pi is configured to use the micro sd card as read only storage. This should prevent damage on power failure. The only exception is a persitent partition, which is used to save the current state. This state will be restored in case of a power failure. This partition should also be safe from corruption due to the mount parametera and the infrequent writes.
-
-The GPIO Pins of the raspberry pi are used to switch a relay, that controls the heating. The switching voltage is provided by an external power supply. A BJT provides an open collector output. This circuit is realized on a custom pcb (hat). The GPIO Pin 17 controls the BJT. The relay is connected to the open collector output and the 12V rail.
 
 ## How to build the sd card image
 1. Clone repository (use `--recursive` to get buildroot submodule)
@@ -61,7 +57,7 @@ The GPIO Pins of the raspberry pi are used to switch a relay, that controls the 
 ## Hardware
 You don't need any special hardware for this. The raspberry pi will just toggle one of the GPIO PINs (see `/opt/heatingControl/controlheating` for details).
 
-The author of this project wants to switch a 12V relay and has designed a hat for this task. This hat is designed to take quite a bit of abuse like e.g. short circuit, reverse power, ESD etc. and supports 5-24V with up to 1.5A (depending on the power supply). In practice it should also tolerate higher voltages and currents, but you probably want to check the schematic and datasheets to learn about the limits.
+The author of this project wants to switch a 12V relay and has designed a hat for this task. This hat is designed to take quite a bit of abuse like e.g. short circuit, reverse power, ESD etc. and can supply 5-24V with up to 1.5A from an external power supply. In practice it should also tolerate higher voltages and currents, but you probably want to check the schematic and datasheets to push the limits.
 
 The hardware is designed to fit nicely into a HighPi Case, which has all necessary cutouts and can be mounted on a wall.
 
@@ -79,7 +75,6 @@ The hardware is designed to fit nicely into a HighPi Case, which has all necessa
     - Dialplan (phone menu, pin): `/etc/asterisk/extensions.conf`
  * The configuration is based on the raspberry pi 2 configuration. It should be easily adjusted to newer versions. It probably even boots, but the serial console is most likely broken, due to a hardware difference.
  * The dhcp client was configured to run in the background. This is useful if the network link isn't ready when we try to get an ip address. This archived with a custom busybox configuration with the option `CONFIG_IFUPDOWN_UDHCPC_CMD_OPTIONS=-R -b -O search"`. The option `-b` sets udhcpc to run in the background. (`-R` is release on exit, `-O search` enables domain search option RFC 3397)
- * 
 
 ## Overview of files
 ```
@@ -103,5 +98,5 @@ The hardware is designed to fit nicely into a HighPi Case, which has all necessa
 
 ## Enhancement Ideas
  * Add an ssh server to make maintenance easier (at the moment you have to connect via serial or connect your Keyboard and display directly). This ssh server could be enabled by a jumper to enable a maintenance mode.
- * Don't run asterisk as root. This sounds simple in theory, but the user needs permissions to write to /sys/class/gpio. The best way to archive this is probably to use `mdev` together with the `devtmpfs`.
+ * Don't run asterisk as root. This sounds simple in theory, but the user needs permissions to write to /sys/class/gpio. The best way to archive this is probably to use `mdev` together with the `devtmpfs`. On the other hand it won't enhance the security a lot, since asterisk is the only service on this device.
  * The logs could potentially fill up our tmpfs. The best way to avoid this would be `logrotate`. For now asterisk is running with disabled logging and cdr. You can still connect to asterisk (`asterisk -r`) and take a look at the events.
