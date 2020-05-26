@@ -72,7 +72,7 @@ TBD
     - SIP configuration file: `/etc/asterisk/sip.conf`
     - Dialplan (phone menu, pin): `/etc/asterisk/extensions.conf`
  * The configuration is based on the raspberry pi 2 configuration. It should be easily adjusted to newer versions. It probably even boots, but the serial console is most likely broken, due to a hardware difference.
- * The dhcp client was configured to run in the background. This is useful if the network link isn't ready when we try to get an ip address. This archived with a custom busybox configuration with the option `CONFIG_IFUPDOWN_UDHCPC_CMD_OPTIONS="-R -n -b"`. The option `-b` sets udhcpc to run in the background. 
+ * The dhcp client was configured to run in the background. This is useful if the network link isn't ready when we try to get an ip address. This archived with a custom busybox configuration with the option `CONFIG_IFUPDOWN_UDHCPC_CMD_OPTIONS=-R -b -O search"`. The option `-b` sets udhcpc to run in the background. (`-R` is release on exit, `-O search` enables domain search option RFC 3397)
 
 ## Overview of files
 ```
