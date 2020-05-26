@@ -3,9 +3,11 @@ SIP Heating Gateway
 
 This device allows you to control the heating (or any other device) by calling in and using an interactive voice menu. In case of a power loss the last state will be restored as soon as the power is back. The software is build to survive unexpected power losses.
 
+The heart of the system is a Raspberry pi with a custom hat to provide 12V to an external relay. On this Raspberry pi a custom embedded linux is used to to control the 12V via a small shell script. The heavy lifting for the SIP connection and the voice menu is done by asterisk, which uses the already mentioned shell script. The linux system is build with buildroot and the hole image image is less than 200MB and boots in a few seconds.
+
 ## Usage
 
-Connect Power (5V via micro-USB and 12V), ethernet and the output to the relay. After bootup (about 10s) the device accepts incoming calls.
+Connect Power (5V via micro-USB and 12V), ethernet and the output to the relay. After bootup the device accepts incoming calls.
 
 Call the device,  wait until pickup and follow the voice instructions:
 1. Enter the PIN and press `#`
@@ -34,7 +36,7 @@ The custom embedded system is based on buildroot. The behaviour at a call is con
  * `/etc/asterisk/extensions.conf`
    Dialplan (phone menu, pin)
 
-The configuration files can be adjusted by changing the files at the overlay (`br-external/board/raspberrypi2-heating-control/rootfs-overlay`.
+The configuration files can be adjusted by changing the files at the overlay (`br-external/board/raspberrypi2-heating-control/rootfs-overlay`. Note that you also have to adjust `br-external/board/raspberrypi-heating-control/post-build.sh`, since it modifies `/etc/hosts` to set the ip of the SIP server.
 
 It is also possible to connect to the device via a serial connection (115200 8N1) or HDMI (untested). The system is by default read-only. To modify the file system it has to be remounted (`mount -o remount,rw /`). The login data is:
 
@@ -57,14 +59,18 @@ The GPIO Pins of the raspberry pi are used to switch a relay, that controls the 
 5. write `buildroot/output/images/sdcard.img` to sd card (e.g. `dd if=buildroot/output/images/sdcard.img of=/dev/mmcblk0 bs=1M && sync`)
 
 ## Hardware
-TBD
+You don't need any special hardware for this. The raspberry pi will just toggle one of the GPIO PINs (see `/opt/heatingControl/controlheating` for details).
+
+The author of this project wants to switch a 12V relay and has designed a hat for this task. This hat is designed to take quite a bit of abuse like e.g. short circuit, reverse power, ESD etc. and supports 5-24V with up to 1.5A (depending on the power supply). In practice it should also tolerate higher voltages and currents, but you probably want to check the schematic and datasheets to learn about the limits.
+
+The hardware is designed to fit nicely into a HighPi Case, which has all necessary cutouts and can be mounted on a wall.
 
 ## Good to know
  * This system uses [Buildroot](https://buildroot.org/) to create a custom embedded system. This provides more flexibility and allows more customization than a stripped down raspbian. The complete image is just a little bigger than 100MB.
  * Connect via 3.3V serial (115200 8N1)
    There should also be a console on the HDMI port (untested).
  * The heating can be controlled by with `/opt/heatingControl/controlheating`
- * The root system is read only. It can be mounted as rw (`mount / -o remount,rw`), but this is only recommand for testing. Every change should be integrated into `br-external`
+ * The root system is read only. It can be mounted as rw (`mount / -o remount,rw`), but this is mainly recommanded for testing. Every change can be integrated into `br-external`
  * There is a small persistent storage partition at the sd card. It is mounted at boot via fstab at `/media/persistent/`. The mount options `rw,sync,data=journal,barrier=1,noatime,commit=1` were choosen to avoid data corruption and wear of the sd card. It is only used to store store the current state at `/media/persistent/last_state` and to restore it after a power loss. On every boot `/etc/init.d/S10restorestate` tries to restore the last state. 
  * To debug problems it might be useful to connect to a running asterisk in verbose mode: `sudo asterisk -rvvvv`
  * Any file can be added/overwritten by adding it ot the rootfs overlay at `br-external/board/raspberrypi2-heating-control/rootfs-overlay/`. 
@@ -73,6 +79,7 @@ TBD
     - Dialplan (phone menu, pin): `/etc/asterisk/extensions.conf`
  * The configuration is based on the raspberry pi 2 configuration. It should be easily adjusted to newer versions. It probably even boots, but the serial console is most likely broken, due to a hardware difference.
  * The dhcp client was configured to run in the background. This is useful if the network link isn't ready when we try to get an ip address. This archived with a custom busybox configuration with the option `CONFIG_IFUPDOWN_UDHCPC_CMD_OPTIONS=-R -b -O search"`. The option `-b` sets udhcpc to run in the background. (`-R` is release on exit, `-O search` enables domain search option RFC 3397)
+ * 
 
 ## Overview of files
 ```
@@ -95,6 +102,6 @@ TBD
 ```
 
 ## Enhancement Ideas
-
+ * Add an ssh server to make maintenance easier (at the moment you have to connect via serial or connect your Keyboard and display directly). This ssh server could be enabled by a jumper to enable a maintenance mode.
  * Don't run asterisk as root. This sounds simple in theory, but the user needs permissions to write to /sys/class/gpio. The best way to archive this is probably to use `mdev` together with the `devtmpfs`.
  * The logs could potentially fill up our tmpfs. The best way to avoid this would be `logrotate`. For now asterisk is running with disabled logging and cdr. You can still connect to asterisk (`asterisk -r`) and take a look at the events.

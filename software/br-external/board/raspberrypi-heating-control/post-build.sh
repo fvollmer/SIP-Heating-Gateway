@@ -14,17 +14,24 @@ fi
 # genext2fs: couldn't allocate a block (no free space)
 # create it manually as suggested at:
 # http://lists.busybox.net/pipermail/buildroot/2018-February/212869.html
-dd if=/dev/zero of=${BINARIES_DIR}/persistent.ext3 bs=10M count=1
-mkfs.ext3 -F ${BINARIES_DIR}/persistent.ext3
+dd if=/dev/zero of="${BINARIES_DIR}/persistent.ext3" bs=10M count=1
+mkfs.ext3 -F "${BINARIES_DIR}/persistent.ext3"
 echo "created: ${BINARIES_DIR}/persistent.ext3"
 
 # add fstab entry for persistent storage
-mkdir -p $TARGET_DIR/media/persistent
-grep -q "^/dev/mmcblk0p3" $TARGET_DIR/etc/fstab || \
+mkdir -p "$TARGET_DIR/media/persistent"
+grep -q "^/dev/mmcblk0p3" "$TARGET_DIR/etc/fstab" || \
     echo "/dev/mmcblk0p3	/media/persistent	ext3	rw,sync,data=journal,barrier=1,noatime,commit=1	0	2" >> \
-    $TARGET_DIR/etc/fstab
+    "$TARGET_DIR/etc/fstab"
 
 # relocate asterisk database to /tmp
-if [ ! -L $TARGET_DIR/usr/lib/asterisk/astdb.sqlite3 ]; then
-    ln -s /tmp/astdb.sqlite3 $TARGET_DIR/usr/lib/asterisk/astdb.sqlite3
+if [ ! -L "$TARGET_DIR/usr/lib/asterisk/astdb.sqlite3" ]; then
+    ln -s "/tmp/astdb.sqlite3" "$TARGET_DIR/usr/lib/asterisk/astdb.sqlite3"
 fi
+
+# add /etc/hosts entry for sip server
+# This avoids a problem in case that the dns server isn't reachable at startup
+# of asterisk and the peer is forever offline.
+# (couldn't find a better solution)
+grep -q 'fritz.box$' "$TARGET_DIR/etc/hosts" || \
+    echo "192.168.178.1 fritz.box" >> "$TARGET_DIR/etc/hosts"
