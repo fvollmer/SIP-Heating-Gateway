@@ -65,7 +65,7 @@ TBD
    There should also be a console on the HDMI port (untested).
  * The heating can be controlled by with `/opt/heatingControl/controlheating`
  * The root system is read only. It can be mounted as rw (`mount / -o remount,rw`), but this is only recommand for testing. Every change should be integrated into `br-external`
- * There is a small persistent storage partition at the sd card. It is mounted at boot via fstab at `/media/persistent/`. The mount options `rw,sync,data=journal,barrier=1,noatime,commit=1` were choosen to avoid data corruption and wear of the sd card. It is only used to store store the current state at `/media/persistent/last_state` and to restore it after a power loss. On every boot `/etc/init.d/S50asterisk` tries to restore the last state. 
+ * There is a small persistent storage partition at the sd card. It is mounted at boot via fstab at `/media/persistent/`. The mount options `rw,sync,data=journal,barrier=1,noatime,commit=1` were choosen to avoid data corruption and wear of the sd card. It is only used to store store the current state at `/media/persistent/last_state` and to restore it after a power loss. On every boot `/etc/init.d/S10restorestate` tries to restore the last state. 
  * To debug problems it might be useful to connect to a running asterisk in verbose mode: `sudo asterisk -rvvvv`
  * Any file can be added/overwritten by adding it ot the rootfs overlay at `br-external/board/raspberrypi2-heating-control/rootfs-overlay/`. 
  * The asterisk configuration files can be found at `/etc/asterisk`. The build process automatically deploys the default configuration files. The overlay is used to overwrite them.
