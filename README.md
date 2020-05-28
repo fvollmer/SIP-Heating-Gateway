@@ -57,7 +57,7 @@ password: ""
 ## Hardware
 You don't need any special hardware for this. The raspberry pi will just toggle one of the GPIO PINs (see `/opt/heatingControl/controlheating` for details).
 
-The author of this project wants to switch a 12V relay and has designed a hat for this task. This hat is designed to take quite a bit of abuse like e.g. short circuit, reverse power, ESD etc. and can supply 5-24V with up to 1.5A from an external power supply. In practice it should also tolerate higher voltages and currents, but you probably want to check the schematic and datasheets to push the limits.
+The author of this project wants to switch a 12V relay and has designed a hat for this task. This hat is designed to take quite a bit of abuse like e.g. short circuit, reverse power, ESD etc. and can supply 5-24V with up to 1.5A from an external power supply. In practice it should also tolerate higher voltages and currents, but you probably want to check the schematic and datasheets to push the limits. Further it has a manual override switch in case of software issues or a failure of the raspberry pi.
 
 The hardware is designed to fit nicely into a HighPi Case, which has all necessary cutouts and can be mounted on a wall.
 
@@ -73,7 +73,8 @@ The hardware is designed to fit nicely into a HighPi Case, which has all necessa
  * The asterisk configuration files can be found at `/etc/asterisk`. The build process automatically deploys the default configuration files. The overlay is used to overwrite them.
     - SIP configuration file: `/etc/asterisk/sip.conf`
     - Dialplan (phone menu, pin): `/etc/asterisk/extensions.conf`
- * The configuration is based on the raspberry pi 2 configuration. It should be easily adjusted to newer versions. It probably even boots, but the serial console is most likely broken, due to a hardware difference.
+ * The buildroot configuration is based on the raspberry pi 2 configuration. It should be easily adjusted to newer versions. It probably even boots on other raspberry pi versions, but the serial console is most likely broken, due to a hardware differences.
+ * eth0 is managed by ifplugd (provided by busybox), which will automatically ifup/ifdown the interface if a network cable is connected/disconnected
  * The dhcp client was configured to run in the background. This is useful if the network link isn't ready when we try to get an ip address. This archived with a custom busybox configuration with the option `CONFIG_IFUPDOWN_UDHCPC_CMD_OPTIONS=-R -b -O search"`. The option `-b` sets udhcpc to run in the background. (`-R` is release on exit, `-O search` enables domain search option RFC 3397)
 
 ## Overview of files
