@@ -5,7 +5,7 @@ This device allows you to control the heating (or any other device) by calling i
 
 The heart of the system is a Raspberry pi with a custom hat to provide 12V to an external relay. On this Raspberry pi a custom embedded linux is used to to control the 12V via a small shell script. It connects via ethernet to the a SIP server (e.g. a fritzbox router or your isp). The heavy lifting for the SIP connection and the voice menu is done by asterisk, which uses the already mentioned shell script to switch a gpio pin. The linux system is build with buildroot and the hole image image is less than 200MB and boots in a few seconds.
 
-The raspberry pi is configured to use the micro sd card as read only storage. This should prevent damage on power failure. The only exception is a persitent partition, which is used to save the current state. This state will be restored in case of a power failure. The partition should also be safe from corruption due to the mount parameters and the infrequent writes.
+The linux system on the raspberry pi is configured to use the micro sd card as read only storage. This should prevent damage on power failure. The only exception is a persitent partition, which is used to save the current state. This state will be restored in case of a power failure. The partition should also be safe from corruption due to the mount parameters and the infrequent writes.
 
 ## Usage
 
@@ -63,24 +63,25 @@ The hardware is designed to fit nicely into a HighPi Case, which has all necessa
 
 ## Good to know
  * This system uses [Buildroot](https://buildroot.org/) to create a custom embedded system. This provides more flexibility and allows more customization than a stripped down raspbian. The complete image is just a little bigger than 100MB.
- * Connect via 3.3V serial (115200 8N1)
-   There should also be a console on the HDMI port (untested).
- * The heating can be controlled by with `/opt/heatingControl/controlheating`
- * The root system is read only. It can be mounted as rw (`mount / -o remount,rw`), but this is mainly recommanded for testing. Every change can be integrated into `br-external`
+ * Connect via 3.3V serial (115200 8N1) or connect an external monitor via HDMI and use a usb keyboard
+ * The heating control script is `/opt/heatingControl/controlheating`
+ * The root system is read only. It can be mounted as rw (`mount / -o remount,rw`), but this is mainly recommanded for testing and maybe the initial configuration. Every change can be integrated into `br-external`. This way the image can be build in a repeatable way.
  * There is a small persistent storage partition at the sd card. It is mounted at boot via fstab at `/media/persistent/`. The mount options `rw,sync,data=journal,barrier=1,noatime,commit=1` were choosen to avoid data corruption and wear of the sd card. It is only used to store store the current state at `/media/persistent/last_state` and to restore it after a power loss. On every boot `/etc/init.d/S10restorestate` tries to restore the last state. 
- * To debug problems it might be useful to connect to a running asterisk in verbose mode: `sudo asterisk -rvvvv`
+ * To debug problems with asterisk it might be useful to connect to a running asterisk in verbose mode: `asterisk -rvvvv`. You can enable SIP debug mode with `sip set debug on`.
  * Any file can be added/overwritten by adding it ot the rootfs overlay at `br-external/board/raspberrypi2-heating-control/rootfs-overlay/`. 
  * The asterisk configuration files can be found at `/etc/asterisk`. The build process automatically deploys the default configuration files. The overlay is used to overwrite them.
     - SIP configuration file: `/etc/asterisk/sip.conf`
     - Dialplan (phone menu, pin): `/etc/asterisk/extensions.conf`
- * The buildroot configuration is based on the raspberry pi 2 configuration. It should be easily adjusted to newer versions. It probably even boots on other raspberry pi versions, but the serial console is most likely broken, due to a hardware differences.
+ * The buildroot configuration is based on the raspberry pi 2 configuration. Other version can easily be added. It probably even boots on other raspberry pi versions, but the serial console is most likely broken, due to a hardware differences.
  * eth0 is managed by ifplugd (provided by busybox), which will automatically ifup/ifdown the interface if a network cable is connected/disconnected
  * The dhcp client was configured to run in the background. This is useful if the network link isn't ready when we try to get an ip address. This archived with a custom busybox configuration with the option `CONFIG_IFUPDOWN_UDHCPC_CMD_OPTIONS=-R -b -O search"`. The option `-b` sets udhcpc to run in the background. (`-R` is release on exit, `-O search` enables domain search option RFC 3397)
+ * Busybox is configured to ship non default packages:
+   - `rx` (in case we want to transfer a file via serial) 
+   - `ifplugd` (see above)
 
 ## Overview of files
 ```
 ├──audio-gen
-│  └── <infos about the audio file generation>
 ├──buildroot
 └──br-external
    ├── board
@@ -96,6 +97,10 @@ The hardware is designed to fit nicely into a HighPi Case, which has all necessa
    ├── external.desc
    └── external.mk
 ```
+
+ * `audio-gen` infos about the audio file generation for the interactive voice menu
+ * `buildroot` git submodule of [buildroot](https://buildroot.org/)
+ * `br-external` external overlay module for buildroot with all configuration and software files to build our custom linux
 
 ## Enhancement Ideas
  * Add an ssh server to make maintenance easier (at the moment you have to connect via serial or connect your Keyboard and display directly). This ssh server could be enabled by a jumper to enable a maintenance mode.
