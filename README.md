@@ -1,6 +1,8 @@
 SIP Heating Gateway
 ====================
 
+<img src="img/rpi_with_hat.jpg" width="450">
+
 This device allows you to control the heating (or any other device) by calling in and using an interactive voice menu. In case of a power loss the last state will be restored as soon as the power is back. The software is build to survive unexpected power losses.
 
 The heart of the system is a Raspberry pi with a custom hat to provide 12V to an external relay. On this Raspberry pi a custom embedded linux is used to to control the 12V via a small shell script. It connects via ethernet to the a SIP server (e.g. a fritzbox router or your isp). The heavy lifting for the SIP connection and the voice menu is done by asterisk, which uses the already mentioned shell script to switch a gpio pin. The linux system is build with buildroot and the hole image image is less than 200MB and boots in a few seconds.
@@ -60,6 +62,8 @@ You don't need any special hardware for this. The raspberry pi will just toggle 
 The author of this project wants to switch a 12V relay and has designed a hat for this task. This hat is designed to take quite a bit of abuse like e.g. short circuit, reverse power, ESD etc. and can supply 5-24V with up to 1.5A from an external power supply. In practice it should also tolerate higher voltages and currents, but you probably want to check the schematic and datasheets to push the limits. Further it has a manual override switch in case of software issues or a failure of the raspberry pi.
 
 The hardware is designed to fit nicely into a HighPi Case, which has all necessary cutouts and can be mounted on a wall.
+
+<img src="img/rpi_with_hat_in_case.jpg" width="300"> <img src="img/rpi_with_hat_inc_case_at_wall.jpg" width="300">
 
 ## Good to know
  * This system uses [Buildroot](https://buildroot.org/) to create a custom embedded system. This provides more flexibility and allows more customization than a stripped down raspbian. The complete image is just a little bigger than 100MB.
