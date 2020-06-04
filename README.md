@@ -83,6 +83,7 @@ The hardware is designed to fit nicely into a HighPi Case, which has all necessa
    - `rx` (in case we want to transfer a file via serial) 
    - `ifplugd` (see above)
  * Aterisk logs to syslog, this avoids filling up our tmpfs. Further cdr (call detail record) is disabled (`/etc/asterisk/cdr.conf`). Busybox rotates syslog for us (CONFIG_FEATURE_ROTATE_LOGFILE)
+ * The hardware watchdog of the raspberry pi (bcm2835_wdt) is used to restart the system in case the system locks up. `/etc/init.d/S15watchdog` starts the watchdog at boot and periodically writes to `/dev/watchdog`.
 
 ## Overview of files
 ```
