@@ -1,5 +1,8 @@
 #!/bin/sh
 
+IFACE=eth0
+IF_WAIT_DELAY=10
+
 asterisk_start()
 {
   echo "Starting Asterisk"
@@ -33,4 +36,4 @@ case "$1" in
     ;;
 esac
 
-exit $?
+exit 0

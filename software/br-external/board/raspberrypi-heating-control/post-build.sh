@@ -29,9 +29,3 @@ if [ ! -L "$TARGET_DIR/usr/lib/asterisk/astdb.sqlite3" ]; then
     ln -s "/tmp/astdb.sqlite3" "$TARGET_DIR/usr/lib/asterisk/astdb.sqlite3"
 fi
 
-# add /etc/hosts entry for sip server
-# This avoids a problem in case that the dns server isn't reachable at startup
-# of asterisk and the peer is forever offline.
-# (couldn't find a better solution)
-grep -q 'fritz.box$' "$TARGET_DIR/etc/hosts" || \
-    echo "192.168.178.1 fritz.box" >> "$TARGET_DIR/etc/hosts"

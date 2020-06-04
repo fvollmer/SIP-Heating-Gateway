@@ -1,0 +1,36 @@
+#!/bin/sh
+
+CHECK_INTERVAL=60 # interval in seconds
+FAIL_COUNTER=0
+THRESHOLD=3
+
+
+while true; do
+  sleep $CHECK_INTERVAL
+  
+  # check if asterisk is running and start asterisk in case it isn't running
+  if ! pgrep -x "asterisk" > /dev/null; then
+    logger -s "asterisk_wdog: Asterisk not running! Starting asterisk"
+    /etc/init.d/S50asterisk start
+  fi
+  
+  # check peer and registry status
+  if asterisk -rx 'sip show peers' | grep -qE 'UNREACHABLE|UNKNOWN' ||
+     asterisk -rx 'sip show registry' | grep -qE 'Failed|Unregistered|Request Sent|Auth. Sent|Rejected|No Authentication'; then
+    logger -s "asterisk_wdog: Asterisk failure, increasing fail counter..."
+    FAIL_COUNTER=$((FAIL_COUNTER+1))
+  elif [ "$FAIL_COUNTER" -gt "0" ]; then
+    # reset counter if there wasn't a failure
+    logger -s "asterisk_wdog: Reset fail counter"
+    FAIL_COUNTER=0
+  fi
+  
+  # restart asterisk if threshold is reached (and reset counter)
+  if [ "$FAIL_COUNTER" -gt "$THRESHOLD" ]; then
+    logger -s "asterisk_wdog: Failure threshold reached, restarting asterisk"
+    /etc/init.d/S50asterisk restart
+    FAIL_COUNTER=0
+  fi
+  
+done
+

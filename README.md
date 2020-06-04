@@ -40,7 +40,9 @@ The custom embedded system is based on buildroot. The behaviour at a call is con
  * `/etc/asterisk/extensions.conf`
    Dialplan (phone menu, pin)
 
-The configuration files can be adjusted by changing the files at the overlay (`br-external/board/raspberrypi2-heating-control/rootfs-overlay`. Note that you also have to adjust `br-external/board/raspberrypi-heating-control/post-build.sh`, since it modifies `/etc/hosts` to set the ip address of the SIP server. Asterisk is configured to only use a minimal amount of modules. Modify `/etc/asterisk/modules.conf` if necessary.
+The configuration files can be adjusted by changing the files at the overlay (`br-external/board/raspberrypi2-heating-control/rootfs-overlay`. Asterisk is configured to only use a minimal amount of modules. Modify `/etc/asterisk/modules.conf` if necessary.
+
+There is a watchdog script (`/opt/heatingControl/asterisk_wdog`) that monitors the peers and registry and will restart asterisk in case of failures. It is automatically started at boot via `/etc/init.d/S55asterisk_wdog`. You probably want to stop it to configure asterisk and start it after the finished configuration.
 
 For maintenace and debugging it is possible to connect to the device via a serial connection (115200 8N1) or HDMI. The system is by default read-only. To modify the file system it has to be remounted (`mount -o remount,rw /`). The login data is:
 
