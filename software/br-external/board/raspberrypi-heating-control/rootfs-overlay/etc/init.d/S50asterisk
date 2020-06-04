@@ -8,8 +8,12 @@ asterisk_start()
 
 asterisk_stop()
 {
+  asterisk -rx 'core stop now'
+  sleep 2
   if [ -r /var/run/asterisk/asterisk.pid ]; then
+    # seems like asterisk didn't stop
     kill $(cat /var/run/asterisk/asterisk.pid)
+    sleep 2
   fi
 }
 
