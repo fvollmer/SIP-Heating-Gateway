@@ -110,6 +110,48 @@ The hardware is designed to fit nicely into a HighPi Case, which has all necessa
  * `buildroot` git submodule of [buildroot](https://buildroot.org/)
  * `br-external` external overlay module for buildroot with all configuration and software files to build our custom linux
 
+## Test cases
+
+After I have made changes, I like to test the following cases to make sure everything works (for now manually, but it would be an interesting idea to automate them).
+
+ * Check basic functionality
+   1. Start Rasbperry Pi with everything connected (including network)
+   2. Call and interact with the voice menu
+   3. Check authentication, automatic timeout, turn heating on/off, check status of heating
+ * Check if state is restored on power loss
+   1. Start Rasbperry Pi with everything connected (including network)
+   2. Turn heating on
+   3. Disconnect power, reconnect power
+   4. Check if heating is automatically turned on while booting
+   5. Repeat for heating off
+ * Simulate power outage
+   1. Disconnect Raspberry Pi AND the network infrastructure power
+   2. Reconnect everything to power
+   3. Check if Raspberry Pi can be called
+ * Start Raspberry Pi without network and connect it later
+   1. Start Raspberry Pi without network connection
+   2. Wait 5 minutes
+   3. Connect network connection
+   4. Wait 5 minutes (asterisk watch dog will restart asterisk after like 4 minutes)
+   5. Check if Raspberry Pi can be called
+
+The previous checks are usually enough, but here are some more:
+
+ * Check ifplugd
+   1. Disconnect ethernet cable from running Pi
+   2. Check if `ifconfig` if ip address is gone (takes a few seconds)
+   3. Reconnect ethernet cable
+   4. Check with `ifconfig` if we get a dhcp lease
+ * Check asterisk watchdog
+   1. Note current PID of asterisk: `pgrep -x asterisk`
+   2. Disconnect ethernet cable from running Pi
+   3. Check if watchdog complains at syslog (`/var/log/messages`), watchdog only checks asterisk once every 60 seconds
+   4. Check if watchdog restarts asterisk after about 4 minutes by comparing the PID
+ * Check if syslog is rotated
+   1. run `while true; do logger hello; done` for some moments
+   2. check if `/var/log/messages` is rotated to `/var/log/messages.0` and if file size is small (like 200kB)
+
+
 ## Enhancement Ideas
  * Add an ssh server to make maintenance easier (at the moment you have to connect via serial or connect your Keyboard and display directly). This ssh server could be enabled by a jumper to enable a maintenance mode.
  * Don't run asterisk as root. This sounds simple in theory, but the user needs permissions to write to /sys/class/gpio. The best way to archive this is probably to use `mdev` together with the `devtmpfs`. On the other hand it won't enhance the security a lot, since asterisk is the only service on this device.
