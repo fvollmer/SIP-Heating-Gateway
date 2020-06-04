@@ -82,6 +82,7 @@ The hardware is designed to fit nicely into a HighPi Case, which has all necessa
  * Busybox is configured to ship non default packages:
    - `rx` (in case we want to transfer a file via serial) 
    - `ifplugd` (see above)
+ * Aterisk logs to syslog, this avoids filling up our tmpfs. Further cdr (call detail record) is disabled (`/etc/asterisk/cdr.conf`). Busybox rotates syslog for us (CONFIG_FEATURE_ROTATE_LOGFILE)
 
 ## Overview of files
 ```
@@ -109,4 +110,3 @@ The hardware is designed to fit nicely into a HighPi Case, which has all necessa
 ## Enhancement Ideas
  * Add an ssh server to make maintenance easier (at the moment you have to connect via serial or connect your Keyboard and display directly). This ssh server could be enabled by a jumper to enable a maintenance mode.
  * Don't run asterisk as root. This sounds simple in theory, but the user needs permissions to write to /sys/class/gpio. The best way to archive this is probably to use `mdev` together with the `devtmpfs`. On the other hand it won't enhance the security a lot, since asterisk is the only service on this device.
- * The logs could potentially fill up our tmpfs. The best way to avoid this would be `logrotate`. For now asterisk is running with disabled logging and cdr. You can still connect to asterisk (`asterisk -r`) and take a look at the events.
