@@ -18,6 +18,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         submodules: true
+        fetch-depth: 0 # for git describe
     - name: Build image
       run: |
         cd software
