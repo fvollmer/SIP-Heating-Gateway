@@ -1,0 +1,86 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+    tags:
+      - 'v*' 
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Build image
+      run: |
+        cd software
+        make BR2_EXTERNAL=$PWD/br-external -C buildroot raspberrypi2-heating-control_defconfig
+        make -C buildroot
+    - name: Build legal-info
+      run: |
+        cd software
+        make -C buildroot legal-info
+        tar -cvf legal-info.tar buildroot/output/legal-info/
+    - name: Upload artifact sd card image
+      uses: actions/upload-artifact@v2
+      with:
+        name: image
+        path: software/buildroot/output/images/sdcard.img
+    - name: Upload artifact legal-info
+      uses: actions/upload-artifact@v2
+      with:
+        name: legal-info
+        path: software/legal-info.tar
+  
+  release:
+    name: Upload Release Asset
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Download sd card image
+        uses: actions/download-artifact@v2
+        with:
+          name: image
+      - name: Download legal-info
+        uses: actions/download-artifact@v2
+        with:
+          name: legal-info
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload release asset sd card image
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./sdcard.img
+          asset_name: sdcard.img
+          asset_content_type: application
+      - name: Upload release asset legal-info
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./legal-info.tar
+          asset_name: legal-info.tar
+          asset_content_type: application
