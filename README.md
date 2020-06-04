@@ -1,5 +1,6 @@
 SIP Heating Gateway
 ====================
+![build](https://github.com/fvollmer/SIP-Heating-Gateway/workflows/build/badge.svg)
 
 <img src="img/rpi_with_hat.jpg" width="450">
 
