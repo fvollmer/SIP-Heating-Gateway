@@ -61,7 +61,13 @@ password: ""
 ## Hardware
 You don't need any special hardware for this. The raspberry pi will just toggle one of the GPIO PINs (see `/opt/heatingControl/controlheating` for details).
 
-The author of this project wants to switch a 12V relay and has designed a hat for this task. This hat is designed to take quite a bit of abuse like e.g. short circuit, reverse power, ESD etc. and can supply 5-24V with up to 1.5A from an external power supply. In practice it should also tolerate higher voltages and currents, but you probably want to check the schematic and datasheets to push the limits. Further it has a manual override switch in case of software issues or a failure of the raspberry pi.
+The author of this project wants to switch a 12V relay and has designed a hat for this task. This hat is designed to take quite a bit of abuse like e.g. short circuit, reverse power, ESD etc. and can supply 5-24V with up to 1.5A from an external power supply. In practice it should also tolerate higher voltages and currents, but you probably want to check the schematic and datasheets to push the limits. Further it has a manual override switch in case of software issues or a failure of the raspberry pi. Simplified schematic:
+
+<img src="hardware/simplified_schematic.svg" width="450">
+
+Full schematic:
+
+<img src="hardware/RPi heating control hat.svg" width="450">
 
 The hardware is designed to fit nicely into a HighPi Case, which has all necessary cutouts and can be mounted on a wall.
 
