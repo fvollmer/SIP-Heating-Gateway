@@ -19,6 +19,8 @@ jobs:
       with:
         submodules: true
         fetch-depth: 0 # for git describe
+    - name: Print version
+      run: git describe
     - name: Build image
       run: |
         cd software
@@ -55,6 +57,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: legal-info
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Create Release
         id: create_release
@@ -74,7 +79,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./sdcard.img
-          asset_name: SIP-Heating-Gateway-${{ github.ref }}-sdcard.img
+          asset_name: SIP-Heating-Gateway-${{ steps.get_version.outputs.VERSION }}-sdcard.img
           asset_content_type: application
       - name: Upload release asset legal-info
         uses: actions/upload-release-asset@v1
@@ -83,5 +88,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./legal-info.tar
-          asset_name: SIP-Heating-Gateway-${{ github.ref }}-legal-info.tar
+          asset_name: SIP-Heating-Gateway-${{ steps.get_version.outputs.VERSION }}-legal-info.tar
           asset_content_type: application
