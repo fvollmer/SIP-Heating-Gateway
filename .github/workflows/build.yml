@@ -19,8 +19,12 @@ jobs:
       with:
         submodules: true
         fetch-depth: 0 # for git describe
+    - name: Fetch tags
+      run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     - name: Print version
       run: git describe
+    - name: Print tags
+      run: git tag
     - name: Build image
       run: |
         cd software
