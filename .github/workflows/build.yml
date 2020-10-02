@@ -12,7 +12,6 @@ jobs:
   build:
     name: Build Project
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout project
       uses: actions/checkout@v2
@@ -28,7 +27,7 @@ jobs:
     - name: Build image
       run: |
         cd software
-        make BR2_EXTERNAL=$PWD/br-external -C buildroot raspberrypi2-heating-control_defconfig
+        make BR2_EXTERNAL=$PWD/br-external -C buildroot raspberrypi23-heating-control_defconfig
         make -C buildroot
     - name: Build legal-info
       run: |
@@ -38,59 +37,65 @@ jobs:
     - name: Upload artifact sd card image
       uses: actions/upload-artifact@v2
       with:
-        name: image
+        name: image-raspberrypi23
         path: software/buildroot/output/images/sdcard.img
     - name: Upload artifact legal-info
       uses: actions/upload-artifact@v2
       with:
-        name: legal-info
+        name: legal-info-raspberrypi23
         path: software/legal-info.tar
   
-  release:
-    name: Upload Release Asset
+  create_release:
+    name: Create Release
     needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: true
+        prerelease: false
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+  
+  upload_release_assests:
+    name: Upload Release assets
+    needs: create_release
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
-
-      - name: Download sd card image
-        uses: actions/download-artifact@v2
-        with:
-          name: image
-      - name: Download legal-info
-        uses: actions/download-artifact@v2
-        with:
-          name: legal-info
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-
-      - name: Upload release asset sd card image
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./sdcard.img
-          asset_name: SIP-Heating-Gateway-${{ steps.get_version.outputs.VERSION }}-sdcard.img
-          asset_content_type: application
-      - name: Upload release asset legal-info
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./legal-info.tar
-          asset_name: SIP-Heating-Gateway-${{ steps.get_version.outputs.VERSION }}-legal-info.tar
-          asset_content_type: application
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+    - name: Download sd card image
+      uses: actions/download-artifact@v2
+      with:
+        name: image-raspberrypi23
+    - name: Download legal-info
+      uses: actions/download-artifact@v2
+      with:
+        name: legal-info-raspberrypi23
+    - name: Upload release assets
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.create_release.outputs.upload_url }}
+        asset_path: ./sdcard.img
+        asset_name: SIP-Heating-Gateway-${{ steps.get_version.outputs.VERSION }}-sdcard-raspberrypi23.img
+        asset_content_type: application
+    - name: Upload release asset legal-info
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.create_release.outputs.upload_url }}
+        asset_path: ./legal-info.tar
+        asset_name: SIP-Heating-Gateway-${{ steps.get_version.outputs.VERSION }}-legal-info-raspberrypi23.tar
+        asset_content_type: application
