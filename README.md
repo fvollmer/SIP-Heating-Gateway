@@ -41,20 +41,21 @@ The custom embedded system is based on buildroot. The behaviour at a call is con
  * `/etc/asterisk/extensions.conf`
    Dialplan (phone menu, pin)
 
-The configuration files can be adjusted by changing the files of the overlay (`br-external/board/raspberrypi2-heating-control/rootfs-overlay`). Asterisk is configured to only use a minimal amount of modules. Modify `/etc/asterisk/modules.conf` if necessary.
+The configuration files can be adjusted by changing the files of the overlay (`br-external/board/raspberrypi-heating-control/rootfs-overlay`). Asterisk is configured to only use a minimal amount of modules. Modify `/etc/asterisk/modules.conf` if necessary.
 
 There is a watchdog script (`/opt/heatingControl/asterisk_wdog`) that monitors the peers and registry and will restart asterisk in case of failures. It is automatically started at boot via `/etc/init.d/S55asterisk_wdog`. You probably want to stop it to configure asterisk and start it after the finished configuration.
 
 For maintenace and debugging it is possible to connect to the device via a serial connection (115200 8N1) or HDMI. The system is by default read-only. To modify the file system it has to be remounted (`mount -o remount,rw /`). The login data is:
 
  * username: "root"
- * password: "" (There is no root password. This is no problem, since there is no way to login remotely)
+ * password: "" (There is no root password. This is no problem, because there is no way to login remotely)
 
 
 ## How to build the sd card image
+You can build the sd card image yourself by cross compiling it on your pc. Depending on your hardware configuration this may take a while. Simply follow these steps:
 1. Clone repository (use `--recursive` to get buildroot submodule)
 2. Change into software folder (`cd software`)
-3. `make BR2_EXTERNAL=$PWD/br-external -C buildroot raspberrypi2-heating-control_defconfig`
+3. `make BR2_EXTERNAL=$PWD/br-external -C buildroot raspberrypi23-heating-control_defconfig`
 4. `make -C buildroot`
 5. write `buildroot/output/images/sdcard.img` to sd card (e.g. `dd if=buildroot/output/images/sdcard.img of=/dev/mmcblk0 bs=1M && sync`)
 
@@ -84,7 +85,7 @@ The hardware is designed to fit nicely into a HighPi Case, which has all necessa
  * The asterisk configuration files can be found at `/etc/asterisk`. The build process automatically deploys the default configuration files. The overlay is used to overwrite them.
     - SIP configuration file: `/etc/asterisk/sip.conf`
     - Dialplan (phone menu, pin): `/etc/asterisk/extensions.conf`
- * The buildroot configuration is based on the raspberry pi 2 configuration. Other version can easily be added. It probably even boots on other raspberry pi versions, but the serial console is most likely broken, due to a hardware differences.
+ * The buildroot configuration is based on the raspberry pi 2 configuration with additions to make it compatible with the raspberry pi 3. Other version can easily be added.
  * eth0 is managed by ifplugd (provided by busybox), which will automatically ifup/ifdown the interface if a network cable is connected/disconnected
  * The dhcp client was configured to run in the background. This is useful if the network link isn't ready when we try to get an ip address. This archived with a custom busybox configuration with the option `CONFIG_IFUPDOWN_UDHCPC_CMD_OPTIONS=-R -b -O search"`. The option `-b` sets udhcpc to run in the background. (`-R` is release on exit, `-O search` enables domain search option RFC 3397)
  * Busybox is configured to ship non default packages:
@@ -95,30 +96,35 @@ The hardware is designed to fit nicely into a HighPi Case, which has all necessa
 
 ## Overview of files
 ```
+├──.github/workflows
 ├──audio-gen
-├──buildroot
-└──br-external
-   ├── board
-   │   └── raspberrypi2-heating-control
-   │       ├── genimage-raspberrypi2-heating-control.cfg
-   │       ├── post-build.sh
-   │       ├── post-image.sh
-   │       └── rootfs-overlay
-   │           └── <config files and scripts>
-   ├── Config.in
-   ├── configs
-   │   └── raspberrypi2-heating-control_defconfig
-   ├── external.desc
-   └── external.mk
+├──hardware
+└──software
+   ├──buildroot
+   └──br-external
+      ├── board
+      │   └── raspberrypi2-heating-control
+      │       ├── genimage-raspberrypi2-heating-control.cfg
+      │       ├── post-build.sh
+      │       ├── post-image.sh
+      │       └── rootfs-overlay
+      │           └── <config files and scripts>
+      ├── Config.in
+      ├── configs
+      │   └── raspberrypi2-heating-control_defconfig
+      ├── external.desc
+      └── external.mk
 ```
 
+ * `.github/workflows` automatic build files
  * `audio-gen` infos about the audio file generation for the interactive voice menu
+ * `hardware` pcb files for the 12V hat
  * `buildroot` git submodule of [buildroot](https://buildroot.org/)
  * `br-external` external overlay module for buildroot with all configuration and software files to build our custom linux
 
 ## Test cases
 
-After I have made changes, I like to test the following cases to make sure everything works (for now manually, but it would be an interesting idea to automate them).
+After making changes to the image, I like to test and verify that nothing broke by accident. The following test cases prooved to be useful. For now testing is done manually, but it would be an interesting idea to automate them.
 
  * Check basic functionality
    1. Start Rasbperry Pi with everything connected (including network)
